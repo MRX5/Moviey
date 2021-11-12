@@ -14,7 +14,9 @@ import com.example.movies.utils.MovieConverter
 import com.squareup.picasso.Picasso
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+
     private var moviesList= mutableListOf<Movie>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
         val inflater=LayoutInflater.from(parent.context)
         val binding=DataBindingUtil.inflate<MovieCardBinding>(inflater,R.layout.movie_card,parent,false)
@@ -32,6 +34,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
         this.moviesList.addAll(MovieConverter.convert(moviesList))
         notifyDataSetChanged()
     }
+
    inner class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(movie:Movie) =with(binding){
             this.movie=movie

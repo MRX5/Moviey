@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(private val moviesRepository: MoviesRepository) :
     ViewModel() {
-    private  val TAG = "MoviesViewModelmostafa"
+
     private var _movies = MutableLiveData<Resource<MoviesResponse>>()
     val movies: LiveData<Resource<MoviesResponse>> get() = _movies
 
