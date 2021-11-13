@@ -68,6 +68,8 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:1.0.0'
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+    //Flex
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'

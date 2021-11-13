@@ -11,14 +11,13 @@
         android:id="@+id/main_toolbar"
         android:theme="@style/toolbarStyle"
         android:layout_width="match_parent"
-
         android:layout_height="?attr/actionBarSize" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/movies_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/light_black"
+        android:background="@android:color/transparent"
         app:tabTextColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

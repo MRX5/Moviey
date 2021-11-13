@@ -1,5 +1,6 @@
 package com.example.movies.ui.movies.framgent
 
+import GridSpacingItemDecoration
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,6 +21,10 @@ import com.example.movies.ui.movies.viewModel.MoviesViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.MovieConverter
 import com.example.movies.utils.Status
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,10 +36,10 @@ class MoviesFragment : Fragment() {
     private var tabName: String? = null
     private val viewModel: MoviesViewModel by viewModels()
     lateinit var binding: FragmentMoviesBinding
-    var page:Int=1
-    var totalPages:Int=0
+    var page: Int = 1
+    var totalPages: Int = 0
     private val moviesAdapter: MoviesAdapter by lazy {
-        MoviesAdapter()
+        MoviesAdapter(requireContext())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +52,7 @@ class MoviesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -59,14 +64,15 @@ class MoviesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        val listener=InfiniteScrollListener{
+        val listener = InfiniteScrollListener {
             page++
-            if(page<=totalPages){
+            if (page <= totalPages) {
                 fetchMovies()
             }
         }
         binding.moviesRecyclerview.apply {
             layoutManager = GridLayoutManager(context, 3)
+            addItemDecoration(GridSpacingItemDecoration(16))
             setHasFixedSize(true)
             adapter = moviesAdapter
             addOnScrollListener(listener)
@@ -74,15 +80,11 @@ class MoviesFragment : Fragment() {
     }
 
     private fun fetchMovies() {
-        when(tabName){
-            Constants.POPULAR->fetchPopularMovies()
-            Constants.UPCOMING->fetchUpcomingMovies()
-            Constants.TOP_RATED->fetchTopRatedMovies()
+        when (tabName) {
+            Constants.POPULAR -> viewModel.fetchPopularMovies(page)
+            Constants.UPCOMING -> viewModel.fetchUpcomingMovies(page)
+            Constants.TOP_RATED -> viewModel.fetchTopRatedMovies(page)
         }
-    }
-
-    private fun fetchPopularMovies(){
-        viewModel.fetchPopularMovies(page)
         viewModel.movies.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> {
@@ -91,44 +93,6 @@ class MoviesFragment : Fragment() {
                 Status.SUCCESS -> {
                     it.data?.let { response ->
                         totalPages = response.total_pages
-                        moviesAdapter.setData(response.results)
-                    }
-                }
-                Status.ERROR -> {
-                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
-    private fun fetchUpcomingMovies(){
-        viewModel.fetchUpcomingMovies(page)
-        viewModel.movies.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.LOADING -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
-                }
-                Status.SUCCESS -> {
-                    it.data?.let { response ->
-                        totalPages=response.total_pages
-                        moviesAdapter.setData(response.results)
-                    }
-                }
-                Status.ERROR -> {
-                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
-                }
-            }
-        })
-    }
-    private fun fetchTopRatedMovies(){
-        viewModel.fetchTopRatedMovies(page)
-        viewModel.movies.observe(viewLifecycleOwner, {
-            when (it.status) {
-                Status.LOADING -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
-                }
-                Status.SUCCESS -> {
-                    it.data?.let { response ->
-                        totalPages=response.total_pages
                         moviesAdapter.setData(response.results)
                     }
                 }

@@ -1,8 +1,10 @@
 package com.example.movies.adapter
 
 import android.util.Log
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.flexbox.FlexboxLayoutManager
 
 class InfiniteScrollListener(private val onLoadMore: () -> Unit) : RecyclerView.OnScrollListener() {
 
@@ -15,7 +17,7 @@ class InfiniteScrollListener(private val onLoadMore: () -> Unit) : RecyclerView.
         val visibleItemCount = recyclerView.childCount
         val totalItemCount = recyclerView.layoutManager!!.itemCount
         val firstVisibleItemPosition =
-            (recyclerView.layoutManager as LinearLayoutManager?)!!.findFirstVisibleItemPosition()
+            (recyclerView.layoutManager as GridLayoutManager?)!!.findFirstVisibleItemPosition()
 
         if (isLoading) {
             if (totalItemCount > previousTotal) {

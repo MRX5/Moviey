@@ -7,6 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_black">#363640</color>
+    <color name="light_black">#1F1E24</color>
+    <color name="recycler_black">#1D1C21</color>
+    <color name="card_background">#282B32</color>
     <color name="yellow">#F4B400</color>
 </resources>
