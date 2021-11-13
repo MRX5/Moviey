@@ -1,6 +1,7 @@
 package com.example.movies.ui.movies.framgent
 
 import GridSpacingItemDecoration
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,8 +16,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
+import com.example.movies.adapter.MovieClickListener
 import com.example.movies.adapter.MoviesAdapter
 import com.example.movies.databinding.FragmentMoviesBinding
+import com.example.movies.model.Movie
+import com.example.movies.ui.details.MovieDetailsActivity
 import com.example.movies.ui.movies.viewModel.MoviesViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.MovieConverter
@@ -32,14 +36,14 @@ import kotlinx.coroutines.launch
 private const val ARG_PARAM1 = "param1"
 
 @AndroidEntryPoint
-class MoviesFragment : Fragment() {
+class MoviesFragment : Fragment(),MovieClickListener {
     private var tabName: String? = null
     private val viewModel: MoviesViewModel by viewModels()
     lateinit var binding: FragmentMoviesBinding
     var page: Int = 1
     var totalPages: Int = 0
     private val moviesAdapter: MoviesAdapter by lazy {
-        MoviesAdapter(requireContext())
+        MoviesAdapter(requireContext(),this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,5 +115,12 @@ class MoviesFragment : Fragment() {
                     putString(ARG_PARAM1, param1)
                 }
             }
+    }
+
+    override fun onMovieClick(movie: Movie) {
+        val intent=Intent(context,MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID,movie.id)
+        }
+        startActivity(intent)
     }
 }
