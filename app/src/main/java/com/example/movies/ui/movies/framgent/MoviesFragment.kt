@@ -7,6 +7,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
@@ -25,10 +27,6 @@ import com.example.movies.ui.movies.viewModel.MoviesViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.MovieConverter
 import com.example.movies.utils.Status
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -92,15 +90,17 @@ class MoviesFragment : Fragment(),MovieClickListener {
         viewModel.movies.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> {
-                    Toast.makeText(context, "Loading", Toast.LENGTH_SHORT).show()
+                    if(totalPages==0)binding.moviesProgressBar.visibility=VISIBLE
                 }
                 Status.SUCCESS -> {
                     it.data?.let { response ->
+                        binding.moviesProgressBar.visibility=GONE
                         totalPages = response.total_pages
                         moviesAdapter.setData(response.results)
                     }
                 }
                 Status.ERROR -> {
+                    binding.moviesProgressBar.visibility= GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 }
             }

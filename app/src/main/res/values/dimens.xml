@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // portrait
+    // movie card portrait
     <dimen name="movie_card_image_width_portrait">125dp</dimen>
     <dimen name="movie_card_image_height_portrait">165dp</dimen>
 
-    //landscape
+    // movie card landscape
     <dimen name="movie_card_image_width_landscape">240dp</dimen>
     <dimen name="movie_card_image_height_landscape">280dp</dimen>
+
+    //details activity movie poster
+    <dimen name="details_movie_poster_width">110dp</dimen>
+    <dimen name="details_movie_poster_height">160dp</dimen>
 </resources>

@@ -42,4 +42,8 @@ class MoviesViewModel @Inject constructor(private val moviesRepository: MoviesRe
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("mostafa", "onCleared: ")
+    }
 }
