@@ -5,60 +5,42 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.movies.model.Movie
-import com.example.movies.model.MoviesResponse
-import com.example.movies.network.RemoteDataSource
 import com.example.movies.utils.Resource
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
-import java.lang.Exception
+import com.example.movies.utils.Utils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.jsoup.Jsoup
 import javax.inject.Inject
+import kotlin.Exception
 
-class MoviesRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) :
-    MoviesRepository {
-    override suspend fun getPopularMovies(page: Int): LiveData<Resource<MoviesResponse>> =
-        liveData {
-            emit(Resource.loading(null))
-            try {
-                val response = remoteDataSource.getPopularMovies(page)
-                if (response.isSuccessful) {
-                    emit(Resource.success(response.body()))
-                } else {
-                    emit(Resource.error(response.message().toString(), null))
-                }
-            } catch (e: Exception) {
-                emit(Resource.error("No internet connection", null))
+class MoviesRepositoryImpl : MoviesRepository {
+
+    override suspend fun getMovies(page: Int): LiveData<Resource<List<Movie>>> = liveData {
+        emit(Resource.loading(null))
+        val movies = mutableListOf<Movie>()
+        val url = "https://tena.egybest.run/movies/?page=$page"
+        try {
+            val document = withContext(Dispatchers.IO) {
+                Jsoup.connect(url).get()
             }
-        }
-
-    override suspend fun getUpcomingMovies(page: Int): LiveData<Resource<MoviesResponse>> =
-        liveData {
-            emit(Resource.loading(null))
-            try {
-                val response = remoteDataSource.getUpcomingMovies(page)
-                if (response.isSuccessful) {
-                    emit(Resource.success(response.body()))
-                } else {
-                    emit(Resource.error(response.message().toString(), null))
-                }
-            } catch (e: Exception) {
-                emit(Resource.error("No internet connection", null))
+            val elements = document.select("a.movie")
+            elements.forEach {
+                val link = it.attr("href")
+                val imgUrl = it.getElementsByTag("img").attr("src")
+                val titleAndYear = it.getElementsByClass("title").text()  // Joker (2021)
+                val title = Utils.getTitle(titleAndYear)
+                val year = Utils.getYear(titleAndYear)
+                movies.add(Movie(link, imgUrl, title, year))
             }
-        }
-
-
-    override suspend fun getTopRatedMovies(page: Int): LiveData<Resource<MoviesResponse>> =
-        liveData {
-            emit(Resource.loading(null))
-            try {
-                val response = remoteDataSource.getTopRatedMovies(page)
-                if (response.isSuccessful) {
-                    emit(Resource.success(response.body()))
-                } else {
-                    emit(Resource.error(response.message().toString(), null))
-                }
-            } catch (e: Exception) {
-                emit(Resource.error("No internet connection", null))
+            if (movies.size != 0) {
+                emit(Resource.success(movies))
+            } else {
+                Resource.error("No movies found", null)
             }
+        } catch (e: Exception) {
+            emit(Resource.error(e.toString(), null))
         }
+    }
+
 
 }

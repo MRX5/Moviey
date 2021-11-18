@@ -6,5 +6,5 @@ object Constants {
     const val POPULAR="Popular"
     const val UPCOMING="Upcoming"
     const val TOP_RATED="Top Rated"
-    const val MOVIE_ID="movie-id"
+    const val MOVIE_LINK="movie-link"
 }

@@ -27,6 +27,7 @@ class InfiniteScrollListener(private val onLoadMore: () -> Unit) : RecyclerView.
 
         if (!isLoading) {
             if (dy > 0) {
+                Log.d("Mostafa", "$visibleItemCount  $firstVisibleItemPosition  $totalItemCount")
                 if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount) {
                     onLoadMore()
                     isLoading = true

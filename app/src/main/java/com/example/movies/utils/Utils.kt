@@ -26,5 +26,15 @@ class Utils {
                 convertPxToDp(context,context.resources.getDimension(R.dimen.movie_card_image_height_portrait))
             }
         }
+
+        fun getTitle(str:String)= str.split("(")[0]
+        fun getYear(str:String): String {
+            return try {
+                str.split("(")[1].substring(0,4)
+            }catch (e:Exception){
+                ""
+            }
+        }
+
     }
 }

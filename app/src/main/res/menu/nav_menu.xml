@@ -4,15 +4,10 @@
     tools:ignore="HardcodedText">
 
     <item
-        android:id="@+id/nav_account"
-        android:title="My Account" />
+        android:id="@+id/moviesFragment"
+        android:title="أفلام" />
 
     <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
-
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Logout" />
-
+        android:id="@+id/seriesFragment"
+        android:title="مسلسلات" />
 </menu>
