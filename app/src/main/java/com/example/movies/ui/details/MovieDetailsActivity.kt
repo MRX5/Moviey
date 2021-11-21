@@ -12,6 +12,7 @@ class MovieDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=DataBindingUtil.setContentView(this,R.layout.activity_movie_details)
         setupToolbar()
+         val x=0
     }
 
     private fun setupToolbar() {
