@@ -36,10 +36,6 @@ class MoviesAdapter(val context: Context,val listener: MovieClickListener) : Rec
    inner class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(movie:Movie) =with(binding){
             this.movie=movie
-         //   val w=Utils.getImageWidth(context)
-         //   val h=Utils.getImageHeight(context)
-            //Picasso.get().load(movie.poster).into(binding.moviePosterImg)
-
             binding.root.setOnClickListener {
                 listener.onMovieClick(movie)
             }

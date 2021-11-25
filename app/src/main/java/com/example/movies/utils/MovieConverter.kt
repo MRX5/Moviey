@@ -34,6 +34,7 @@ class MovieConverter {
         }
 
         fun addPrefixPath(url: String?)=Constants.TMDB_IMAGE_PATH+url
+        fun addBackdropPrefixPath(url:String?)=Constants.TMDB_BACKDROP_PATH+url
 
         fun extractGenresNames(genres:List<Genres>): String {
             val result=StringBuilder("")
