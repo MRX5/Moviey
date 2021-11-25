@@ -1,6 +1,8 @@
 package com.example.movies.di
 
 import com.example.movies.network.RemoteDataSource
+import com.example.movies.ui.details.repo.MovieDetailsRepository
+import com.example.movies.ui.details.repo.MovieDetailsRepositoryImpl
 import com.example.movies.ui.movies.repo.MoviesRepository
 import com.example.movies.ui.movies.repo.MoviesRepositoryImpl
 import dagger.Module
@@ -16,4 +18,8 @@ object RepositoryModule {
     @Provides
     fun provideMoviesRepository(remoteDataSource: RemoteDataSource): MoviesRepository =
         MoviesRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource): MovieDetailsRepository =
+        MovieDetailsRepositoryImpl(remoteDataSource)
 }

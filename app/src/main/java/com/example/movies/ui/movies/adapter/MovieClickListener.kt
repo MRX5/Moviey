@@ -1,4 +1,4 @@
-package com.example.movies.adapter
+package com.example.movies.ui.movies.adapter
 
 import com.example.movies.model.Movie
 

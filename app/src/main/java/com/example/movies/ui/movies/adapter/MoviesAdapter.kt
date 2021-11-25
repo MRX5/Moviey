@@ -1,7 +1,6 @@
-package com.example.movies.adapter
+package com.example.movies.ui.movies.adapter
 
 import android.content.Context
-import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,7 +9,6 @@ import com.example.movies.R
 import com.example.movies.databinding.MovieCardBinding
 import com.example.movies.model.Movie
 import com.example.movies.utils.MovieConverter
-import com.example.movies.utils.Utils
 import com.squareup.picasso.Picasso
 
 class MoviesAdapter(val context: Context,val listener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
@@ -38,9 +36,9 @@ class MoviesAdapter(val context: Context,val listener: MovieClickListener) : Rec
    inner class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(movie:Movie) =with(binding){
             this.movie=movie
-            val w=Utils.getImageWidth(context)
-            val h=Utils.getImageHeight(context)
-            Picasso.get().load(movie.poster).resize(w,h).into(binding.moviePosterImg)
+         //   val w=Utils.getImageWidth(context)
+         //   val h=Utils.getImageHeight(context)
+            //Picasso.get().load(movie.poster).into(binding.moviePosterImg)
 
             binding.root.setOnClickListener {
                 listener.onMovieClick(movie)

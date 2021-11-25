@@ -1,5 +1,6 @@
 package com.example.movies.di
 
+import com.example.movies.BuildConfig
 import com.example.movies.network.RemoteDataSourceImpl
 import com.example.movies.network.ApiService
 import com.example.movies.network.RemoteDataSource
@@ -9,7 +10,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -30,11 +30,18 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideLoggingInterceptor(): OkHttpClient {
-        val logging=HttpLoggingInterceptor();
-        logging.level = HttpLoggingInterceptor.Level.BODY;
-        val httpClient =OkHttpClient.Builder();
-        httpClient.addInterceptor(logging)
-        return httpClient.build()
+        val interceptor = Interceptor { chain ->
+            val url = chain.request().url().newBuilder()
+                .addQueryParameter("api_key", BuildConfig.API_KEY)
+                .build()
+
+            val request = chain.request()
+                .newBuilder()
+                .url(url)
+                .build()
+            chain.proceed(request)
+        }
+        return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
     }
     @Provides
     @Singleton

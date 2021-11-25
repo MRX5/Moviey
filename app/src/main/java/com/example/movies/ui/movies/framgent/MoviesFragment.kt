@@ -3,38 +3,31 @@ package com.example.movies.ui.movies.framgent
 import GridSpacingItemDecoration
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movies.R
-import com.example.movies.adapter.InfiniteScrollListener
-import com.example.movies.adapter.MovieClickListener
-import com.example.movies.adapter.MoviesAdapter
+import com.example.movies.ui.movies.adapter.InfiniteScrollListener
+import com.example.movies.ui.movies.adapter.MovieClickListener
+import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.databinding.FragmentMoviesBinding
 import com.example.movies.model.Movie
-import com.example.movies.ui.details.MovieDetailsActivity
+import com.example.movies.ui.details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.viewModel.MoviesViewModel
 import com.example.movies.utils.Constants
-import com.example.movies.utils.MovieConverter
 import com.example.movies.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 
 private const val ARG_PARAM1 = "param1"
 
 @AndroidEntryPoint
-class MoviesFragment : Fragment(),MovieClickListener {
+class MoviesFragment : Fragment(), MovieClickListener {
     private var tabName: String? = null
     private val viewModel: MoviesViewModel by viewModels()
     lateinit var binding: FragmentMoviesBinding
@@ -118,7 +111,7 @@ class MoviesFragment : Fragment(),MovieClickListener {
     }
 
     override fun onMovieClick(movie: Movie) {
-        val intent=Intent(context,MovieDetailsActivity::class.java).apply {
+        val intent=Intent(context, MovieDetailsActivity::class.java).apply {
             putExtra(Constants.MOVIE_ID,movie.id)
         }
         startActivity(intent)
