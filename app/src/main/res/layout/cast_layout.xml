@@ -51,7 +51,7 @@
         android:maxLines="2"
         android:text="@{cast.character}"
         android:textColor="@android:color/darker_gray"
-        android:textSize="10sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cast_name" />
 

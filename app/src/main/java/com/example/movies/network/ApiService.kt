@@ -19,8 +19,10 @@ interface ApiService {
      suspend fun getTopRatedMovies(@Query("page") page:Int):Response<MoviesResponse>
 
     @GET("movie/{movie_id}")
-    suspend fun getMovieDetails(@Path("movie_id") movieID:Int, @Query("append_to_response") credits:String="credits")
-                :Response<MovieDetailsResponse>
+    suspend fun getMovieDetails(
+        @Path("movie_id") movieID:Int,
+        @Query("append_to_response") pr:List<String> = listOf("credits,videos,recommendations"))
+    :Response<MovieDetailsResponse>
 
 
 }

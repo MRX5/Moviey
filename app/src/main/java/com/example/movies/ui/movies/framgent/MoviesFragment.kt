@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.ui.movies.adapter.InfiniteScrollListener
-import com.example.movies.ui.movies.adapter.MovieClickListener
+import com.example.movies.adapter.MovieClickListener
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.databinding.FragmentMoviesBinding
 import com.example.movies.model.Movie

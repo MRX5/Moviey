@@ -7,6 +7,6 @@ data class Video(
 )
 data class Trailer(
     val name:String,
-    val youtubeKey:String,
+    val key:String,
     val type:String
 )

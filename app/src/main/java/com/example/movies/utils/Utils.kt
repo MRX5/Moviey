@@ -6,7 +6,7 @@ import com.example.movies.R
 
 class Utils {
     companion object{
-        private fun convertPxToDp(context: Context, px: Float):Int{
+         fun convertPxToDp(context: Context, px: Float):Int{
             val x=context.resources.displayMetrics.density
             return (x*px).toInt()
         }

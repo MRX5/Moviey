@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.movies.model.Cast
 import com.example.movies.model.Genres
 import com.example.movies.model.Movie
+import com.example.movies.model.Video
 import java.lang.StringBuilder
 
 class MovieConverter {
@@ -26,8 +27,8 @@ class MovieConverter {
             return if(minutes!=null){
                 val hours = minutes.toInt() / 60
                 val min = minutes.toInt() % 60
-                if (hours == 0) " • ${min}m"
-                else " • ${hours}h ${min}m"
+                if (hours == 0) "${min}m"
+                else "${hours}h ${min}m"
             }else{
                 "0h 0m"
             }
@@ -45,11 +46,22 @@ class MovieConverter {
             else result.toString()
         }
 
-        fun extractCastsPictures(casts: List<Cast>): List<Cast> {
-            casts.forEach {
+        fun extractCastsPictures(casts: List<Cast>?): List<Cast> {
+            casts?.forEach {
                 it.profilePicture= addPrefixPath(it.profilePicture)
-            }
+            }?:return emptyList()
             return casts
+        }
+
+        fun extractYoutubeLink(videos: Video?): String {
+             videos?.let {
+                it.results.forEach { current->
+                    if(current.type=="Trailer"){
+                        return Constants.YOUTUBE_PATH+current.key
+                    }
+                }
+            }
+            return ""
         }
 
     }

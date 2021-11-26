@@ -6,10 +6,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
+import com.example.movies.adapter.MovieClickListener
 import com.example.movies.databinding.MovieCardBinding
 import com.example.movies.model.Movie
 import com.example.movies.utils.MovieConverter
-import com.squareup.picasso.Picasso
 
 class MoviesAdapter(val context: Context,val listener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 

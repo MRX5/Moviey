@@ -32,7 +32,7 @@ class MovieDetailsViewModel @Inject constructor(private val repository: MovieDet
                         it.data.length = MovieConverter.formatMovieLength(data.length)
                         it.data.backdrop = MovieConverter.addBackdropPrefixPath(data.backdrop)
                         it.data.poster = MovieConverter.addPrefixPath(data.poster)
-                        it.data.credits.casts=MovieConverter.extractCastsPictures(data.credits.casts)
+                        it.data.credits?.casts=MovieConverter.extractCastsPictures(data.credits?.casts)
                     }
                 }.launchIn(viewModelScope)
         }

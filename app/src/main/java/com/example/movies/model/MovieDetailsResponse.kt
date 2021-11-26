@@ -12,7 +12,8 @@ data class MovieDetailsResponse(
     @SerializedName("release_date") var year:String?,
     @SerializedName("vote_average") val vote:Double?,
     @SerializedName("runtime") var length:String?,
-    val genres:List<Genres>,
-    val credits: Credits,
-    val videos: Video
+    val genres:List<Genres>?,
+    val credits: Credits?,
+    val videos: Video?,
+    val recommendations:Recommendations?
 )
