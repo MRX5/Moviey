@@ -25,4 +25,5 @@ interface ApiService {
     :Response<MovieDetailsResponse>
 
 
+
 }

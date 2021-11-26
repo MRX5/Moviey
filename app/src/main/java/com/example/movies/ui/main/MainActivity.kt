@@ -1,19 +1,17 @@
 package com.example.movies.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import com.example.movies.R
 import com.example.movies.adapter.ViewPagerAdapter
 import com.example.movies.databinding.ActivityMainBinding
+import com.example.movies.ui.search.activity.SearchActivity
 import com.example.movies.utils.Constants
-import com.example.movies.utils.MovieConverter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -69,8 +67,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(item.itemId==R.id.action_search){
+            launchSearchActivity()
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun launchSearchActivity() {
+        val intent= Intent(this, SearchActivity::class.java)
+        startActivity(intent)
     }
 }
