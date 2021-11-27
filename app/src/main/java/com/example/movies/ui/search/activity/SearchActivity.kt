@@ -26,12 +26,14 @@ import kotlinx.coroutines.flow.collect
 private const val TAG = "SearchActivitymostafa"
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
+
     lateinit var binding: ActivitySearchBinding
     private val viewModel:SearchViewModel by viewModels()
     private lateinit var searchAdapter:SearchAdapter
     private var page=1
     private var totalPages=0
     private var queryString=""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
