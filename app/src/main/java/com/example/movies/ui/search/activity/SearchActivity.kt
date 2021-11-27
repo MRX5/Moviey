@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.collect
 
-private const val TAG = "SearchActivitymostafa"
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
 
@@ -41,6 +40,10 @@ class SearchActivity : AppCompatActivity() {
         setupToolbar()
         setupRecyclerView()
         setupViewModel()
+    }
+    private fun setupToolbar() {
+        setSupportActionBar(binding.searchToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun setupRecyclerView() {
@@ -85,11 +88,6 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupToolbar() {
-        setSupportActionBar(binding.searchToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.search_menu, menu)
         return super.onCreateOptionsMenu(menu)
@@ -99,6 +97,7 @@ class SearchActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_search) {
             val searchView = item.actionView as SearchView
             searchView.setOnQueryTextListener(queryListener())
+            searchView.setIconifiedByDefault(false)
             return true
         }
         return super.onOptionsItemSelected(item)
@@ -121,5 +120,10 @@ class SearchActivity : AppCompatActivity() {
             }
             return true
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }

@@ -31,6 +31,7 @@ private const val TAG = "MovieDetailsmostafa"
 
 @AndroidEntryPoint
 class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
+
     lateinit var binding: ActivityMovieDetailsBinding
     private val viewModel: MovieDetailsViewModel by viewModels()
     private lateinit var castsAdapter: CastsAdapter
@@ -96,6 +97,7 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
             }
         }
     }
+
     private fun populateViews(moviesDetails: MovieDetailsResponse){
         binding.progressBar.visibility = GONE
         binding.detailsActivityScrollView.visibility = VISIBLE
@@ -124,5 +126,9 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
         startActivity(intent)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 
 }

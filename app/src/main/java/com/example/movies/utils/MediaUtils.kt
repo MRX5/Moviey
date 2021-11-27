@@ -1,6 +1,7 @@
 package com.example.movies.utils
 
 import com.example.movies.model.entity.*
+import java.lang.Exception
 import java.lang.StringBuilder
 
 class MediaUtils {
@@ -111,12 +112,12 @@ class MediaUtils {
             }?:0.0f
         }
 
-        fun filterMediaType(mediaList: List<Media>): MutableList<Media> {
-           return mediaList.filter {
+        fun filterMediaType(mediaList: List<Media>): List<Media> {
+            return mediaList.filter {
                it.media_type!="person"
            }.sortedByDescending {
                it.vote
-           } as MutableList<Media>
+           }
         }
     }
 }
