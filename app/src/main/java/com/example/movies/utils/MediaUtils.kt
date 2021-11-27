@@ -1,0 +1,122 @@
+package com.example.movies.utils
+
+import com.example.movies.model.entity.*
+import java.lang.StringBuilder
+
+class MediaUtils {
+
+    companion object {
+
+        fun convert(movies: List<Movie>): List<Movie> {
+            movies.forEach {
+                it.poster = Constants.TMDB_IMAGE_PATH + it.poster
+                it.release_date = it.release_date?.substring(0, 4)
+            }
+            return movies
+        }
+
+        fun extractYearFromDate(date: String?): String {
+            date?.let {
+                return if(it.isNotEmpty())it.substring(0,4) else "No date"
+            }?:return "No date"
+        }
+
+        fun formatMovieLength(minutes: String?): String {
+            return if(minutes!=null){
+                val hours = minutes.toInt() / 60
+                val min = minutes.toInt() % 60
+                if (hours == 0) "${min}m"
+                else "${hours}h ${min}m"
+            }else{
+                "0h 0m"
+            }
+        }
+
+        fun addPrefixPath(url: String?)=Constants.TMDB_IMAGE_PATH+url
+        fun addBackdropPrefixPath(url:String?)=Constants.TMDB_BACKDROP_PATH+url
+
+        fun extractGenresNames(genres:List<Genres>): String {
+            val result=StringBuilder("")
+            for(idx in 0..(genres.size - 1).coerceAtMost(2)){
+                result.append(genres[idx].name+", ")
+            }
+            return if(result.last().isWhitespace()) result.dropLast(2).toString()
+            else result.toString()
+        }
+
+        fun extractCastsPictures(casts: List<Cast>?): List<Cast> {
+            casts?.forEach {
+                it.profilePicture= addPrefixPath(it.profilePicture)
+            }?:return emptyList()
+            return casts
+        }
+
+        fun extractYoutubeLink(videos: Video?): String {
+             videos?.let {
+                it.results.forEach { current->
+                    if(current.type=="Trailer"){
+                        return Constants.YOUTUBE_PATH+current.key
+                    }
+                }
+            }
+            return ""
+        }
+
+        fun covertGenresIdToName(genres:List<Int>?):String{
+            var result=""
+            var cnt=2
+            if(genres!=null) {
+                for (idx in genres.indices) {
+                    when (genres[idx]) {
+                        28 -> result += ", " + "Action"
+                        12 -> result += ", " + "Adventure"
+                        16 -> result += ", " + "Animation"
+                        35 -> result += ", " + "Comedy"
+                        80 -> result += ", " + "Crime"
+                        99 -> result += ", " + "Documentary"
+                        18 -> result += ", " + "Drama"
+                        10751 -> result += ", " + "Family"
+                        14 -> result += ", " + "Fantasy"
+                        36 -> result += ", " + "History"
+                        27 -> result += ", " + "Horror"
+                        10402 -> result += ", " + "Music"
+                        9648 -> result += ", " + "Mystery"
+                        10749 -> result += ", " + "Romance"
+                        878 -> result += ", " + "Science Fiction"
+                        10770 -> result += ", " + "TV Movie"
+                        53 -> result += ", " + "Thriller"
+                        10752 -> result += ", " + "War"
+                        37 -> result += ", " + "Western"
+                        10759 -> result += ", " + "Action, Adventure"
+                        10762 -> result += ", " + "Kids"
+                        10763 -> result += ", " + "News"
+                        10764 -> result += ", " + "Reality"
+                        10765 -> result += ", " + "Sci-Fi, Fantasy"
+                        10766 -> result += ", " + "Soap"
+                        10767 -> result += ", " + "Talk"
+                        10768 -> result += ", " + "War, Politics"
+                    }
+                    if (cnt != 0) cnt--
+                    else break
+                }
+                if (result.isNotEmpty()) result = result.drop(2) // remove ", " from result
+                else result="No genres"
+            }
+            return result
+        }
+
+        fun getActualRate(vote: Double?): Float {
+            return vote?.let {
+                 (vote/2).toFloat()
+            }?:0.0f
+        }
+
+        fun filterMediaType(mediaList: List<Media>): MutableList<Media> {
+           return mediaList.filter {
+               it.media_type!="person"
+           }.sortedByDescending {
+               it.vote
+           } as MutableList<Media>
+        }
+    }
+}

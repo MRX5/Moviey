@@ -1,6 +1,4 @@
-package com.example.movies.model
-
-import com.google.gson.annotations.SerializedName
+package com.example.movies.model.entity
 
 data class Video(
      val results:List<Trailer>

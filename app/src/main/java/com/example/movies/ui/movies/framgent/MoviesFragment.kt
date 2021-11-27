@@ -12,11 +12,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movies.ui.movies.adapter.InfiniteScrollListener
+import com.example.movies.adapter.InfiniteScrollListener
 import com.example.movies.adapter.MovieClickListener
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.databinding.FragmentMoviesBinding
-import com.example.movies.model.Movie
+import com.example.movies.model.entity.Movie
 import com.example.movies.ui.details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.viewModel.MoviesViewModel
 import com.example.movies.utils.Constants
@@ -34,7 +34,7 @@ class MoviesFragment : Fragment(), MovieClickListener {
     var page: Int = 1
     var totalPages: Int = 0
     private val moviesAdapter: MoviesAdapter by lazy {
-        MoviesAdapter(requireContext(),this)
+        MoviesAdapter(requireContext(), this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,12 +59,12 @@ class MoviesFragment : Fragment(), MovieClickListener {
     }
 
     private fun setupRecyclerView() {
-        val listener = InfiniteScrollListener {
+        val listener = InfiniteScrollListener({
             page++
             if (page <= totalPages) {
                 fetchMovies()
             }
-        }
+        }, false)
         binding.moviesRecyclerview.apply {
             layoutManager = GridLayoutManager(context, 3)
             addItemDecoration(GridSpacingItemDecoration(16))
@@ -83,17 +83,17 @@ class MoviesFragment : Fragment(), MovieClickListener {
         viewModel.movies.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.LOADING -> {
-                    if(totalPages==0)binding.moviesProgressBar.visibility=VISIBLE
+                    if (totalPages == 0) binding.moviesProgressBar.visibility = VISIBLE
                 }
                 Status.SUCCESS -> {
                     it.data?.let { response ->
-                        binding.moviesProgressBar.visibility=GONE
+                        binding.moviesProgressBar.visibility = GONE
                         totalPages = response.total_pages
                         moviesAdapter.setData(response.results)
                     }
                 }
                 Status.ERROR -> {
-                    binding.moviesProgressBar.visibility= GONE
+                    binding.moviesProgressBar.visibility = GONE
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 }
             }
@@ -111,8 +111,8 @@ class MoviesFragment : Fragment(), MovieClickListener {
     }
 
     override fun onMovieClick(movie: Movie) {
-        val intent=Intent(context, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID,movie.id)
+        val intent = Intent(context, MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID, movie.id)
         }
         startActivity(intent)
     }

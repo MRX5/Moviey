@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.adapter.MovieClickListener
 import com.example.movies.databinding.MovieCardBinding
-import com.example.movies.model.Movie
-import com.example.movies.utils.MovieConverter
+import com.example.movies.model.entity.Movie
+import com.example.movies.utils.MediaUtils
 
 class MoviesAdapter(val context: Context,val listener: MovieClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
@@ -29,12 +29,12 @@ class MoviesAdapter(val context: Context,val listener: MovieClickListener) : Rec
     override fun getItemCount()=moviesList.size
 
     fun setData(moviesList:List<Movie>){
-        this.moviesList.addAll(MovieConverter.convert(moviesList))
+        this.moviesList.addAll(MediaUtils.convert(moviesList))
         notifyDataSetChanged()
     }
 
    inner class MoviesViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(movie:Movie) =with(binding){
+        fun bind(movie: Movie) =with(binding){
             this.movie=movie
             binding.root.setOnClickListener {
                 listener.onMovieClick(movie)

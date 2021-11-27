@@ -1,15 +1,10 @@
 package com.example.movies.ui.movies.repo
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
-import com.example.movies.model.Movie
-import com.example.movies.model.MoviesResponse
+import com.example.movies.model.response.MoviesResponse
 import com.example.movies.network.RemoteDataSource
 import com.example.movies.utils.Resource
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import java.lang.Exception
 import javax.inject.Inject
 

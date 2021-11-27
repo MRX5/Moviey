@@ -5,7 +5,7 @@
     <data class="MovieCardBinding">
         <variable
             name="movie"
-            type="com.example.movies.model.Movie" />
+            type="com.example.movies.model.entity.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

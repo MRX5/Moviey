@@ -5,6 +5,8 @@ import com.example.movies.ui.details.repo.MovieDetailsRepository
 import com.example.movies.ui.details.repo.MovieDetailsRepositoryImpl
 import com.example.movies.ui.movies.repo.MoviesRepository
 import com.example.movies.ui.movies.repo.MoviesRepositoryImpl
+import com.example.movies.ui.search.repo.SearchRepository
+import com.example.movies.ui.search.repo.SearchRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,4 +24,8 @@ object RepositoryModule {
     @Provides
     fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource): MovieDetailsRepository =
         MovieDetailsRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideSearchRepository(remoteDataSource: RemoteDataSource):SearchRepository=
+        SearchRepositoryImpl(remoteDataSource)
 }

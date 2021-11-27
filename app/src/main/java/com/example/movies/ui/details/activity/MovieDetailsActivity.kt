@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -16,16 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.MovieClickListener
 import com.example.movies.databinding.ActivityMovieDetailsBinding
-import com.example.movies.model.Movie
-import com.example.movies.model.MovieDetailsResponse
-import com.example.movies.model.MoviesResponse
+import com.example.movies.model.entity.Movie
+import com.example.movies.model.response.MovieDetailsResponse
 import com.example.movies.ui.details.adapter.CastsAdapter
 import com.example.movies.ui.details.adapter.RecommendationsAdapter
 import com.example.movies.ui.details.viewModel.MovieDetailsViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
-import com.example.movies.utils.HorizontalSpacingItemDecoration
-import com.example.movies.utils.MovieConverter
+import com.example.movies.utils.LinearSpacingItemDecoration
+import com.example.movies.utils.MediaUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -71,7 +69,7 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
         binding.recommendationsRecyclerview.apply {
             layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
-            addItemDecoration(HorizontalSpacingItemDecoration(context))
+            addItemDecoration(LinearSpacingItemDecoration(context,LinearLayoutManager.HORIZONTAL))
             adapter=recommendationsAdapter
         }
     }
@@ -102,17 +100,17 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
         binding.progressBar.visibility = GONE
         binding.detailsActivityScrollView.visibility = VISIBLE
         binding.movie = moviesDetails
-        binding.genres = moviesDetails.genres?.let { it -> MovieConverter.extractGenresNames(it) }
+        binding.genres = moviesDetails.genres?.let { it -> MediaUtils.extractGenresNames(it) }
         moviesDetails.credits?.let { it -> castsAdapter.setData(it.casts) }
         moviesDetails.recommendations?.let { it->recommendationsAdapter.setData(it.results) }
-        youtubeLink = MovieConverter.extractYoutubeLink(moviesDetails.videos)
+        youtubeLink = MediaUtils.extractYoutubeLink(moviesDetails.videos)
     }
 
     private fun watchTrailer() {
         binding.detailsMovieTrailer.setOnClickListener {
-            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink));
+            val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse(youtubeLink))
             try {
-                startActivity(webIntent);
+                startActivity(webIntent)
             } catch (ex: ActivityNotFoundException) {
                 Toast.makeText(this, ex.message.toString(), Toast.LENGTH_LONG).show()
             }

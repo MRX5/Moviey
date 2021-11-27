@@ -1,11 +1,8 @@
 package com.example.movies.ui.details.repo
 
-import com.example.movies.model.MovieDetailsResponse
 import com.example.movies.network.RemoteDataSource
 import com.example.movies.utils.DataState
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 class MovieDetailsRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource)

@@ -6,7 +6,7 @@
     <data class="ActivityMovieDetailsBinding">
         <variable
             name="movie"
-            type="com.example.movies.model.MovieDetailsResponse" />
+            type="com.example.movies.model.response.MovieDetailsResponse" />
         <variable
             name="genres"
             type="String" />

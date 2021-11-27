@@ -1,7 +1,8 @@
 package com.example.movies.network
 
-import com.example.movies.model.MovieDetailsResponse
-import com.example.movies.model.MoviesResponse
+import com.example.movies.model.response.MovieDetailsResponse
+import com.example.movies.model.response.MoviesResponse
+import com.example.movies.model.response.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -24,6 +25,7 @@ interface ApiService {
         @Query("append_to_response") pr:List<String> = listOf("credits,videos,recommendations"))
     :Response<MovieDetailsResponse>
 
-
+    @GET("search/multi")
+    suspend fun search(@Query("query")query:String,@Query("page")page:Int):Response<SearchResponse>
 
 }

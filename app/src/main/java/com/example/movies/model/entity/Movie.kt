@@ -1,4 +1,4 @@
-package com.example.movies.model
+package com.example.movies.model.entity
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -9,4 +9,5 @@ data class Movie(
     val title:String,
     @SerializedName("poster_path") var poster:String,
     val overview:String,
-    var release_date:String, )
+    var release_date:String?,
+    )

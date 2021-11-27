@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.adapter.MovieClickListener
 import com.example.movies.databinding.MovieCardBinding
-import com.example.movies.model.Movie
-import com.example.movies.utils.MovieConverter
+import com.example.movies.model.entity.Movie
+import com.example.movies.utils.MediaUtils
 
 class RecommendationsAdapter(private val listener:MovieClickListener) :
     RecyclerView.Adapter<RecommendationsAdapter.RecommendationsViewHolder>() {
@@ -23,7 +23,7 @@ class RecommendationsAdapter(private val listener:MovieClickListener) :
 
     override fun onBindViewHolder(holder: RecommendationsViewHolder, position: Int) {
         val movie=recommendationsList[position]
-        movie.release_date=MovieConverter.getMovieYear(movie.release_date)
+        movie.release_date=MediaUtils.extractYearFromDate(movie.release_date)
         holder.bind(movie)
     }
 
@@ -35,7 +35,7 @@ class RecommendationsAdapter(private val listener:MovieClickListener) :
     }
 
     inner class RecommendationsViewHolder(private val binding: MovieCardBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(movie:Movie) =with(binding){
+        fun bind(movie: Movie) =with(binding){
             this.movie=movie
             binding.root.setOnClickListener {
                 listener.onMovieClick(movie)

@@ -2,10 +2,10 @@ package com.example.movies.ui.details.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.MovieDetailsResponse
+import com.example.movies.model.response.MovieDetailsResponse
 import com.example.movies.ui.details.repo.MovieDetailsRepository
 import com.example.movies.utils.DataState
-import com.example.movies.utils.MovieConverter
+import com.example.movies.utils.MediaUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -28,11 +28,11 @@ class MovieDetailsViewModel @Inject constructor(private val repository: MovieDet
                 }.map {
                     if (it is DataState.Success) {
                         val data = it.data
-                        it.data.year = MovieConverter.getMovieYear(data.year)
-                        it.data.length = MovieConverter.formatMovieLength(data.length)
-                        it.data.backdrop = MovieConverter.addBackdropPrefixPath(data.backdrop)
-                        it.data.poster = MovieConverter.addPrefixPath(data.poster)
-                        it.data.credits?.casts=MovieConverter.extractCastsPictures(data.credits?.casts)
+                        it.data.year = MediaUtils.extractYearFromDate(data.year)
+                        it.data.length = MediaUtils.formatMovieLength(data.length)
+                        it.data.backdrop = MediaUtils.addBackdropPrefixPath(data.backdrop)
+                        it.data.poster = MediaUtils.addPrefixPath(data.poster)
+                        it.data.credits?.casts=MediaUtils.extractCastsPictures(data.credits?.casts)
                     }
                 }.launchIn(viewModelScope)
         }

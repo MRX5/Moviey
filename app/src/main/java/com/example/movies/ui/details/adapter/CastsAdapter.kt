@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.databinding.CastLayoutBinding
-import com.example.movies.model.Cast
+import com.example.movies.model.entity.Cast
 
 class CastsAdapter : RecyclerView.Adapter<CastsAdapter.CastViewHolder>() {
 
