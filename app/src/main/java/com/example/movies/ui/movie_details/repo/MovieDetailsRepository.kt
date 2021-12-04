@@ -1,4 +1,4 @@
-package com.example.movies.ui.details.repo
+package com.example.movies.ui.movie_details.repo
 
 import com.example.movies.model.response.MovieDetailsResponse
 import com.example.movies.utils.DataState

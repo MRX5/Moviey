@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data class="MovieCardBinding">
+    <data class="TvShowCardBinding">
         <variable
-            name="movie"
-            type="com.example.movies.model.entity.Movie" />
+            name="tvShow"
+            type="com.example.movies.model.entity.TV_Show" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/movie_poster_img"
+                android:id="@+id/tvShow_poster_img"
                 android:layout_width="@dimen/movie_card_image_width_portrait"
                 android:layout_height="@dimen/movie_card_image_height_portrait"
                 android:adjustViewBounds="true"
@@ -28,15 +28,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:loadImage="@{movie.poster}" />
+                app:loadImage="@{tvShow.poster}" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/movie_card_gradient"
-                app:layout_constraintBottom_toBottomOf="@+id/movie_poster_img"
+                app:layout_constraintBottom_toBottomOf="@+id/tvShow_poster_img"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/movie_poster_img"
+                app:layout_constraintStart_toStartOf="@+id/tvShow_poster_img"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
@@ -50,14 +50,14 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
-                    android:id="@+id/movie_name"
+                    android:id="@+id/tvShow_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-black"
                     android:maxWidth="100dp"
                     android:maxLines="1"
-                    android:text="@{movie.title}"
+                    android:text="@{tvShow.name}"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
 
@@ -65,7 +65,7 @@
                     android:id="@+id/details_tv_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{movie.release_date}"
+                    android:text="@{tvShow.release_date}"
                     android:textColor="@color/white"
                     android:textSize="10sp" />
             </LinearLayout>

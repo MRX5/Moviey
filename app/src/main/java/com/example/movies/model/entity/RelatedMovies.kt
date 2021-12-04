@@ -2,6 +2,6 @@ package com.example.movies.model.entity
 
 import com.example.movies.model.entity.Movie
 
-data class Recommendations(
+data class RelatedMovies(
     val results:List<Movie>
 )

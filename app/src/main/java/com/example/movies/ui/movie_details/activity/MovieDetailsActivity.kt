@@ -1,4 +1,4 @@
-package com.example.movies.ui.details.activity
+package com.example.movies.ui.movie_details.activity
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -13,13 +13,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
-import com.example.movies.adapter.MovieClickListener
+import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.ActivityMovieDetailsBinding
-import com.example.movies.model.entity.Movie
 import com.example.movies.model.response.MovieDetailsResponse
-import com.example.movies.ui.details.adapter.CastsAdapter
-import com.example.movies.ui.details.adapter.RecommendationsAdapter
-import com.example.movies.ui.details.viewModel.MovieDetailsViewModel
+import com.example.movies.adapter.CastsAdapter
+import com.example.movies.ui.movie_details.adapter.RelatedMoviesAdapter
+import com.example.movies.ui.movie_details.viewModel.MovieDetailsViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
@@ -30,12 +29,12 @@ import kotlinx.coroutines.flow.collect
 private const val TAG = "MovieDetailsmostafa"
 
 @AndroidEntryPoint
-class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
+class MovieDetailsActivity : AppCompatActivity(), MediaClickListener {
 
-    lateinit var binding: ActivityMovieDetailsBinding
+    private lateinit var binding: ActivityMovieDetailsBinding
     private val viewModel: MovieDetailsViewModel by viewModels()
     private lateinit var castsAdapter: CastsAdapter
-    private lateinit var recommendationsAdapter: RecommendationsAdapter
+    private lateinit var relatedMoviesAdapter: RelatedMoviesAdapter
     private var youtubeLink = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,12 +65,12 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
     }
 
     private fun setupRecommendationsRecyclerView() {
-        recommendationsAdapter = RecommendationsAdapter(this)
+        relatedMoviesAdapter = RelatedMoviesAdapter(this)
         binding.recommendationsRecyclerview.apply {
             layoutManager=LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
             setHasFixedSize(true)
             addItemDecoration(LinearSpacingItemDecoration(context,LinearLayoutManager.HORIZONTAL))
-            adapter=recommendationsAdapter
+            adapter=relatedMoviesAdapter
         }
     }
 
@@ -104,7 +103,7 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
         binding.movie = moviesDetails
         binding.genres = moviesDetails.genres?.let { it -> MediaUtils.extractGenresNames(it) }
         moviesDetails.credits?.let { it -> castsAdapter.setData(it.casts) }
-        moviesDetails.recommendations?.let { it->recommendationsAdapter.setData(it.results) }
+        moviesDetails.recommendations?.let { it->relatedMoviesAdapter.setData(it.results) }
         youtubeLink = MediaUtils.extractYoutubeLink(moviesDetails.videos)
     }
 
@@ -119,9 +118,9 @@ class MovieDetailsActivity : AppCompatActivity(), MovieClickListener {
         }
     }
 
-    override fun onMovieClick(movie: Movie) {
+    override fun onItemClick(mediaType:String ,mediaID: Int) {
         val intent=Intent(this, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID,movie.id)
+            putExtra(Constants.MOVIE_ID,mediaID)
         }
         startActivity(intent)
     }

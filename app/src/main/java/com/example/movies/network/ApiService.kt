@@ -3,6 +3,7 @@ package com.example.movies.network
 import com.example.movies.model.response.MovieDetailsResponse
 import com.example.movies.model.response.MoviesResponse
 import com.example.movies.model.response.SearchResponse
+import com.example.movies.model.response.TvDetailsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,4 +29,9 @@ interface ApiService {
     @GET("search/multi")
     suspend fun search(@Query("query")query:String,@Query("page")page:Int):Response<SearchResponse>
 
+    @GET("tv/{tv_id}")
+    suspend fun getTvShowDetails(
+        @Path("tv_id") tvID:Int,
+        @Query("append_to_response") pr:List<String> = listOf("credits,videos,recommendations"))
+            :Response<TvDetailsResponse>
 }

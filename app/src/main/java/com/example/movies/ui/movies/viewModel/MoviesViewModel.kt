@@ -4,8 +4,11 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.movies.model.response.MoviesResponse
 import com.example.movies.ui.movies.repo.MoviesRepository
-import com.example.movies.utils.Resource
+import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,29 +16,36 @@ import javax.inject.Inject
 class MoviesViewModel @Inject constructor(private val moviesRepository: MoviesRepository) :
     ViewModel() {
 
-    private var _movies = MutableLiveData<Resource<MoviesResponse>>()
-    val movies: LiveData<Resource<MoviesResponse>> get() = _movies
+    private var _movies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
+    val movies: MutableStateFlow<DataState<MoviesResponse>> get() = _movies
 
     fun fetchPopularMovies(page: Int) {
         viewModelScope.launch {
-            _movies= moviesRepository.getPopularMovies(page) as MutableLiveData<Resource<MoviesResponse>>
+            moviesRepository.getPopularMovies(page).onEach {
+                    _movies.value=it
+                }.launchIn(viewModelScope)
         }
     }
 
     fun fetchUpcomingMovies(page: Int) {
         viewModelScope.launch {
-            _movies= moviesRepository.getUpcomingMovies(page) as MutableLiveData<Resource<MoviesResponse>>
+            viewModelScope.launch {
+                moviesRepository.getUpcomingMovies(page).onEach {
+                    _movies.value=it
+                }.launchIn(viewModelScope)
+            }
         }
     }
 
     fun fetchTopRatedMovies(page: Int) {
         viewModelScope.launch {
-            _movies= moviesRepository.getTopRatedMovies(page) as MutableLiveData<Resource<MoviesResponse>>
+            viewModelScope.launch {
+                moviesRepository.getTopRatedMovies(page).onEach {
+                    _movies.value=it
+                }.launchIn(viewModelScope)
+            }
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.d("mostafa", "onCleared: ")
-    }
+
 }

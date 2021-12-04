@@ -1,5 +1,6 @@
-package com.example.movies.ui.details.adapter
+package com.example.movies.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -20,6 +21,7 @@ class CastsAdapter : RecyclerView.Adapter<CastsAdapter.CastViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CastViewHolder, position: Int) {
+        Log.d("mostafa", "onBind: ${castsList[position].profilePicture}")
         holder.bind(castsList[position])
     }
 

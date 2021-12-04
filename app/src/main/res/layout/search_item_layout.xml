@@ -75,6 +75,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="@{media.title}"
         android:layout_marginBottom="8dp"
+        android:maxLines="2"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/movie_category"

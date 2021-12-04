@@ -41,7 +41,7 @@ class MediaUtils {
             for(idx in 0..(genres.size - 1).coerceAtMost(2)){
                 result.append(genres[idx].name+", ")
             }
-            return if(result.last().isWhitespace()) result.dropLast(2).toString()
+            return if(result.isNotEmpty()&&result.last().isWhitespace()) result.dropLast(2).toString()
             else result.toString()
         }
 
@@ -115,8 +115,6 @@ class MediaUtils {
         fun filterMediaType(mediaList: List<Media>): List<Media> {
             return mediaList.filter {
                it.media_type!="person"
-           }.sortedByDescending {
-               it.vote
            }
         }
     }

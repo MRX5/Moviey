@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data class="SeasonCardBinding">
+
+        <variable
+            name="season"
+            type="com.example.movies.model.entity.Season" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/card_background"
+        app:cardCornerRadius="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/season_poster_img"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{season.poster}" />
+
+            <TextView
+                android:id="@+id/season_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@{season.name}"
+                android:layout_marginStart="8dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/season_poster_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/season_episode_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{season.episode_count}"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/season_name"
+                app:layout_constraintTop_toBottomOf="@+id/season_name" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{season.air_date}"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/season_episode_count"
+                app:layout_constraintTop_toBottomOf="@+id/season_episode_count" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -1,9 +1,12 @@
 package com.example.movies.ui.search.repo
 
+import android.util.Log
 import com.example.movies.model.response.SearchResponse
 import com.example.movies.network.RemoteDataSource
 import com.example.movies.utils.DataState
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import javax.inject.Inject
@@ -11,7 +14,8 @@ import javax.inject.Inject
 class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource) :
     SearchRepository {
 
-    override suspend fun search(query: String,page:Int): Flow<DataState<SearchResponse>> =
+    @FlowPreview
+    override suspend fun search(query: String, page:Int): Flow<DataState<SearchResponse>> =
         flow {
             emit(DataState.Loading)
             try {
@@ -27,5 +31,5 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
             }catch (ex:Exception){
                 emit(DataState.Error(ex.message.toString()))
             }
-        }
+        }.debounce(2000)
 }

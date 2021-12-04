@@ -1,5 +1,6 @@
 package com.example.movies.ui.search.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,9 +15,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
+import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.ActivitySearchBinding
+import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.search.adapter.SearchAdapter
 import com.example.movies.ui.search.viewModel.SearchViewModel
+import com.example.movies.ui.tv_details.activity.TvDetailsActivity
+import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,14 +29,14 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(), MediaClickListener {
 
     lateinit var binding: ActivitySearchBinding
-    private val viewModel:SearchViewModel by viewModels()
-    private lateinit var searchAdapter:SearchAdapter
-    private var page=1
-    private var totalPages=0
-    private var queryString=""
+    private val viewModel: SearchViewModel by viewModels()
+    private val searchAdapter by lazy { SearchAdapter(this) }
+    private var page = 1
+    private var totalPages = 0
+    private var queryString = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,7 @@ class SearchActivity : AppCompatActivity() {
         setupRecyclerView()
         setupViewModel()
     }
+
     private fun setupToolbar() {
         setSupportActionBar(binding.searchToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -55,12 +61,11 @@ class SearchActivity : AppCompatActivity() {
             }
         }, true)
 
-        searchAdapter= SearchAdapter()
         binding.searchRecyclerview.apply {
-            layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
-            addItemDecoration(LinearSpacingItemDecoration(context,LinearLayoutManager.VERTICAL))
-            adapter=searchAdapter
+            addItemDecoration(LinearSpacingItemDecoration(context, LinearLayoutManager.VERTICAL))
+            adapter = searchAdapter
             addOnScrollListener(listener)
         }
     }
@@ -68,21 +73,22 @@ class SearchActivity : AppCompatActivity() {
     private fun setupViewModel() {
         lifecycleScope.launchWhenCreated {
             viewModel.media.collect {
-                when(it){
+                when (it) {
                     is DataState.Loading -> {
-                        binding.progressBar.visibility=VISIBLE
+                        binding.progressBar.visibility = VISIBLE
                     }
 
-                    is DataState.Success->{
-                        binding.progressBar.visibility=GONE
+                    is DataState.Success -> {
+                        binding.progressBar.visibility = GONE
                         searchAdapter.setData(it.data.results)
-                        totalPages=it.data.total_pages
+                        totalPages = it.data.total_pages
                     }
 
-                    is DataState.Error->{
-                        binding.progressBar.visibility=GONE
+                    is DataState.Error -> {
+                        binding.progressBar.visibility = GONE
                     }
-                    else -> {}
+                    else -> {
+                    }
                 }
             }
         }
@@ -103,7 +109,7 @@ class SearchActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun queryListener()=object:SearchView.OnQueryTextListener {
+    private fun queryListener() = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             return true
         }
@@ -111,10 +117,10 @@ class SearchActivity : AppCompatActivity() {
         override fun onQueryTextChange(query: String?): Boolean {
             lifecycleScope.launchWhenCreated {
                 query?.run {
-                    if(query.isNotEmpty()) {
+                    if (query.isNotEmpty()) {
                         searchAdapter.clearData()
-                        viewModel.search(query,page)
-                        queryString=query
+                        viewModel.search(query, page)
+                        queryString = query
                     }
                 }
             }
@@ -125,5 +131,19 @@ class SearchActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onItemClick(mediaType: String, mediaID: Int) {
+        val intent: Intent
+        if (mediaType == Constants.MOVIE) {
+            intent = Intent(this, MovieDetailsActivity::class.java).apply {
+                putExtra(Constants.MOVIE_ID, mediaID)
+            }
+        } else {
+            intent = Intent(this, TvDetailsActivity::class.java).apply {
+                putExtra(Constants.TV_ID, mediaID)
+            }
+        }
+        startActivity(intent)
     }
 }

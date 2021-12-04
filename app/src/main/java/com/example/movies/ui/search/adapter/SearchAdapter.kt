@@ -5,14 +5,17 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
+import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.SearchItemLayoutBinding
 import com.example.movies.model.entity.Media
+import com.example.movies.utils.Constants
 import com.example.movies.utils.MediaUtils
 
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    var mediaList = mutableListOf<Media>()
+class SearchAdapter(private val listener: MediaClickListener) :
+    RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
+    var mediaList = mutableListOf<Media>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,7 +39,8 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         this.mediaList.addAll(MediaUtils.filterMediaType(mediaList))
         notifyDataSetChanged()
     }
-    fun clearData(){
+
+    fun clearData() {
         mediaList.clear()
         notifyDataSetChanged()
     }
@@ -44,16 +48,24 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     inner class SearchViewHolder(private val binding: SearchItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(media: Media) = with(binding) {
-            if(media.media_type=="movie"){
-                media.release_date=MediaUtils.extractYearFromDate(media.release_date)
-            }else{ // tv
-                media.release_date=MediaUtils.extractYearFromDate(media.first_air_date)
-                media.title=media.name
+            if (media.media_type == "movie") {
+                media.release_date = MediaUtils.extractYearFromDate(media.release_date)
+            } else { // tv
+                media.release_date = MediaUtils.extractYearFromDate(media.first_air_date)
+                media.title = media.name
             }
 
             binding.media = media
             binding.genres = MediaUtils.covertGenresIdToName(media.genre_ids)
-            binding.rateBar.rating=MediaUtils.getActualRate(media.vote)
+            binding.rateBar.rating = MediaUtils.getActualRate(media.vote)
+
+            binding.root.setOnClickListener {
+                if(media.media_type==Constants.MOVIE){
+                    listener.onItemClick(Constants.MOVIE,media.id)
+                }else{
+                    listener.onItemClick(Constants.TV,media.id)
+                }
+            }
         }
     }
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data class="MovieCardBinding">
+
         <variable
             name="movie"
             type="com.example.movies.model.entity.Movie" />
@@ -11,8 +12,8 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="2dp"
         android:backgroundTint="@color/card_background"
+        app:cardCornerRadius="2dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,7 +28,9 @@
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadImage="@{movie.poster}" />
+
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -36,6 +39,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/movie_poster_img"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:id="@+id/linearLayout"
                 android:layout_width="0dp"
@@ -59,11 +63,11 @@
                     android:textSize="10sp" />
 
                 <TextView
-                    android:id="@+id/details_movie_year"
+                    android:id="@+id/details_tv_year"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
                     android:text="@{movie.release_date}"
+                    android:textColor="@color/white"
                     android:textSize="10sp" />
             </LinearLayout>
 

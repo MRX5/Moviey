@@ -1,11 +1,11 @@
 package com.example.movies.ui.movies.repo
 
-import androidx.lifecycle.LiveData
 import com.example.movies.model.response.MoviesResponse
-import com.example.movies.utils.Resource
+import com.example.movies.utils.DataState
+import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
-    suspend fun getPopularMovies(page:Int): LiveData<Resource<MoviesResponse>>
-    suspend fun getUpcomingMovies(page:Int):LiveData<Resource<MoviesResponse>>
-    suspend fun getTopRatedMovies(page:Int):LiveData<Resource<MoviesResponse>>
+    suspend fun getPopularMovies(page:Int): Flow<DataState<MoviesResponse>>
+    suspend fun getUpcomingMovies(page:Int):Flow<DataState<MoviesResponse>>
+    suspend fun getTopRatedMovies(page:Int):Flow<DataState<MoviesResponse>>
 }
