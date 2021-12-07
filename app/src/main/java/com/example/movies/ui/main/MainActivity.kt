@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
     lateinit var binding: ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController:NavController
-    private var prevID:Int=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
