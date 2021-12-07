@@ -2,17 +2,55 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="HardcodedText">
+    <group
+        android:id="@+id/group1">
+        <item
+            android:id="@+id/subtitle"
+            android:title="Movies">
+            <menu>
+                <item
+                    android:id="@+id/popularMoviesFragment"
+                    android:icon="@drawable/icon_popular"
+                    android:title="Popular" />
 
-    <item
-        android:id="@+id/nav_account"
-        android:title="My Account" />
+                <item
+                    android:id="@+id/upcomingMoviesFragment"
+                    android:icon="@drawable/icon_upcoming"
+                    android:title="Upcoming" />
 
-    <item
-        android:id="@+id/nav_settings"
-        android:title="Settings" />
+                <item
+                    android:id="@+id/topRatedMoviesFragment"
+                    android:icon="@drawable/icon_top_rate"
+                    android:title="Top Rated" />
+            </menu>
+        </item>
+    </group>
 
-    <item
-        android:id="@+id/nav_logout"
-        android:title="Logout" />
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/subtitle2"
+            android:title="TV Shows">
+            <menu>
+                <item
+                    android:icon="@drawable/icon_popular"
+                    android:title="Popular" />
 
+                <item
+                    android:id="@+id/TvFragment"
+                    android:icon="@drawable/icon_upcoming"
+                    android:title="Upcoming" />
+
+                <item
+                    android:icon="@drawable/icon_top_rate"
+                    android:title="Top Rated" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:id="@+id/group3">
+        <item
+            android:id="@+id/searchActivity"
+            android:icon="@drawable/icon_search"
+            android:title="Search" />
+    </group>
 </menu>

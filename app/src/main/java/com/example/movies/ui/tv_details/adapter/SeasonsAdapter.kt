@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.movies.R
 import com.example.movies.databinding.SeasonCardBinding
 import com.example.movies.model.entity.Season
+import com.example.movies.utils.MediaUtils
 
 class SeasonsAdapter : RecyclerView.Adapter<SeasonsAdapter.SeasonViewHolder>() {
 
@@ -24,13 +25,12 @@ class SeasonsAdapter : RecyclerView.Adapter<SeasonsAdapter.SeasonViewHolder>() {
     override fun getItemCount() = seasons.size
 
     fun setData(season: List<Season>) {
-        this.seasons = season as MutableList<Season>
+        this.seasons = MediaUtils.filterSeasonList(season) as MutableList<Season>
         notifyDataSetChanged()
     }
 
     inner class SeasonViewHolder(private val binding:SeasonCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(season: Season) = with(binding) {
-            season.episode_count=season.episode_count+" Episodes"
            this.season=season
         }
     }

@@ -50,6 +50,7 @@ class SearchActivity : AppCompatActivity(), MediaClickListener {
     private fun setupToolbar() {
         setSupportActionBar(binding.searchToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Search"
     }
 
     private fun setupRecyclerView() {

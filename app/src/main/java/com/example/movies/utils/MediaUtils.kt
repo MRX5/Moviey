@@ -117,5 +117,16 @@ class MediaUtils {
                it.media_type!="person"
            }
         }
+
+        fun filterSeasonList(seasons: List<Season>): List<Season> {
+             val filteredList=seasons.filter {
+                 it.season_number!=0 && it.episode_count!="0"
+             }
+             filteredList.map {
+                 it.episode_count=it.episode_count+" Episodes"
+                 it.air_date= extractYearFromDate(it.air_date)
+             }
+            return filteredList
+        }
     }
 }

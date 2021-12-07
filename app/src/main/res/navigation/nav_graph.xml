@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+
+    <activity
+        android:id="@+id/searchActivity"
+        android:name="com.example.movies.ui.search.activity.SearchActivity"
+        android:label="SearchActivity" />
+
+    <fragment
+        android:id="@+id/popularMoviesFragment"
+        android:name="com.example.movies.ui.movies.popular.fragment.PopularMoviesFragment"
+        android:label="Popular Movies" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.movies.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            app:popUpTo="@+id/splashFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_splashFragment_to_popularMoviesFragment"
+            app:destination="@id/popularMoviesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topRatedMoviesFragment"
+        android:name="com.example.movies.ui.movies.top_rated.fragment.TopRatedMoviesFragment"
+        android:label="TopRated Movies" />
+
+    <fragment
+        android:id="@+id/upcomingMoviesFragment"
+        android:name="com.example.movies.ui.movies.upcoming.fragment.UpcomingMoviesFragment"
+        android:label="Upcoming Movies" />
+
+</navigation>

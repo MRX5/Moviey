@@ -3,8 +3,12 @@ package com.example.movies.di
 import com.example.movies.network.RemoteDataSource
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepository
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepositoryImpl
-import com.example.movies.ui.movies.repo.MoviesRepository
-import com.example.movies.ui.movies.repo.MoviesRepositoryImpl
+import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
+import com.example.movies.ui.movies.popular.repo.PopularMoviesRepositoryImpl
+import com.example.movies.ui.movies.top_rated.repo.TopRatedMoviesRepository
+import com.example.movies.ui.movies.top_rated.repo.TopRatedMoviesRepositoryImpl
+import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepository
+import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepositoryImpl
 import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.ui.search.repo.SearchRepositoryImpl
 import com.example.movies.ui.tv_details.repo.TvDetailsRepository
@@ -19,8 +23,16 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 object RepositoryModule {
 
     @Provides
-    fun provideMoviesRepository(remoteDataSource: RemoteDataSource): MoviesRepository =
-        MoviesRepositoryImpl(remoteDataSource)
+    fun providePopularMoviesRepository(remoteDataSource: RemoteDataSource): PopularMoviesRepository =
+        PopularMoviesRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideUpcomingMoviesRepository(remoteDataSource: RemoteDataSource): UpcomingMoviesRepository =
+        UpcomingMoviesRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideTopRatedMoviesRepository(remoteDataSource: RemoteDataSource): TopRatedMoviesRepository =
+        TopRatedMoviesRepositoryImpl(remoteDataSource)
 
     @Provides
     fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource): MovieDetailsRepository =

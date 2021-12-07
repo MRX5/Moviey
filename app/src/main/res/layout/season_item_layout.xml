@@ -11,10 +11,10 @@
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/card_background"
-        app:cardCornerRadius="2dp">
+        android:backgroundTint="#14FFFFFF"
+        app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/season_poster_img"
                 android:layout_width="100dp"
-                android:layout_height="150dp"
+                android:layout_height="140dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,23 +43,27 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/season_episode_count"
+                android:id="@+id/season_air_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{season.episode_count}"
+                android:text="@{season.air_date}"
                 android:layout_marginTop="4dp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="@+id/season_name"
                 app:layout_constraintTop_toBottomOf="@+id/season_name" />
 
             <TextView
+                android:id="@+id/season_episode_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{season.air_date}"
+                android:text="@{season.episode_count}"
                 android:layout_marginTop="4dp"
+                android:textStyle="bold"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/season_episode_count"
-                app:layout_constraintTop_toBottomOf="@+id/season_episode_count" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="@+id/season_air_date"
+                app:layout_constraintTop_toBottomOf="@+id/season_air_date" />
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>

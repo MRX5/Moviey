@@ -11,4 +11,5 @@
     <color name="recycler_black">#1D1C21</color>
     <color name="card_background">#282B32</color>
     <color name="yellow">#F4B400</color>
+    <color name="divider">#474F54</color>
 </resources>

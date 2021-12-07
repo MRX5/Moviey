@@ -1,4 +1,4 @@
-package com.example.movies.ui.movies.framgent
+package com.example.movies.ui.movies.popular.fragment
 
 import GridSpacingItemDecoration
 import android.content.Intent
@@ -6,52 +6,38 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
 import com.example.movies.adapter.MediaClickListener
-import com.example.movies.ui.movies.adapter.MoviesAdapter
-import com.example.movies.databinding.FragmentMoviesBinding
+import com.example.movies.databinding.FragmentPopularMoviesBinding
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
-import com.example.movies.ui.movies.viewModel.MoviesViewModel
+import com.example.movies.ui.movies.adapter.MoviesAdapter
+import com.example.movies.ui.movies.popular.viewModel.PopularViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-
-private const val ARG_PARAM1 = "param1"
-
 @AndroidEntryPoint
-class MoviesFragment : Fragment(), MediaClickListener {
-    private var tabName: String? = null
-    private val viewModel: MoviesViewModel by viewModels()
-    lateinit var binding: FragmentMoviesBinding
-    var page: Int = 1
-    var totalPages: Int = 0
-
-    private val moviesAdapter: MoviesAdapter by lazy {
-        MoviesAdapter(requireContext(), this)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            tabName = it.getString(ARG_PARAM1)
-        }
-    }
+class PopularMoviesFragment : Fragment(), MediaClickListener {
+     lateinit var binding: FragmentPopularMoviesBinding
+    private val viewModel: PopularViewModel by viewModels()
+    private val moviesAdapter by lazy { MoviesAdapter(requireContext(), this) }
+    private var page: Int = 1
+    private var totalPages: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMoviesBinding.inflate(inflater, container, false)
+    ): View? {
+        binding = FragmentPopularMoviesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -79,25 +65,21 @@ class MoviesFragment : Fragment(), MediaClickListener {
     }
 
     private fun fetchMovies() {
-        when (tabName) {
-            Constants.POPULAR -> viewModel.fetchPopularMovies(page)
-            Constants.UPCOMING -> viewModel.fetchUpcomingMovies(page)
-            Constants.TOP_RATED -> viewModel.fetchTopRatedMovies(page)
-        }
+        viewModel.fetchPopularMovies(page)
 
         lifecycleScope.launch {
-            viewModel.movies.collect{
+            viewModel.movies.collect {
                 when(it){
                     is DataState.Loading->{
-                        if (totalPages == 0) binding.moviesProgressBar.visibility = VISIBLE
+                        if (totalPages == 0) binding.moviesProgressBar.visibility = View.VISIBLE
                     }
                     is DataState.Success->{
-                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesProgressBar.visibility = View.GONE
                         totalPages = it.data.total_pages
                         moviesAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
-                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesProgressBar.visibility = View.GONE
                         Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -105,20 +87,11 @@ class MoviesFragment : Fragment(), MediaClickListener {
         }
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String) =
-            MoviesFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                }
-            }
-    }
-
-    override fun onItemClick(mediaType:String,mediaID: Int) {
-        val intent = Intent(context, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID, mediaID)
+    override fun onItemClick(mediaType: String, mediaID: Int) {
+        val intent= Intent(context, MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID,mediaID)
         }
         startActivity(intent)
     }
+
 }

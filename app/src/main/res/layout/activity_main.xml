@@ -13,29 +13,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/app_bar"
-                layout="@layout/appbar_layout"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:theme="@style/toolbarStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/movies_viewpager"
+            <fragment
+                android:id="@+id/nav_host_fragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                app:defaultNavHost="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+                app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
+                app:navGraph="@navigation/nav_graph" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="@color/light_black"
+            android:background="#131212"
+            app:headerLayout="@layout/drawer_layout_header"
+            app:itemIconTint="@color/yellow"
             app:itemTextColor="@color/white"
-            app:menu="@menu/nav_menu" />
+            app:menu="@menu/nav_menu"
+            app:theme="@style/ThemeOverlay.AppCompat.navTheme" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
