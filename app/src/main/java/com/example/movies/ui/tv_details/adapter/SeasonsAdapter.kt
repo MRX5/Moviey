@@ -2,7 +2,6 @@ package com.example.movies.ui.tv_details.adapter
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.movies.R
@@ -25,7 +24,7 @@ class SeasonsAdapter : RecyclerView.Adapter<SeasonsAdapter.SeasonViewHolder>() {
     override fun getItemCount() = seasons.size
 
     fun setData(season: List<Season>) {
-        this.seasons = MediaUtils.filterSeasonList(season) as MutableList<Season>
+        this.seasons = MediaUtils.convertAndFilterSeasonList(season) as MutableList<Season>
         notifyDataSetChanged()
     }
 

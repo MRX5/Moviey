@@ -2,7 +2,6 @@
 <layout>
 
     <data class="ActivityTvDetailsBinding">
-
         <variable
             name="tvShow"
             type="com.example.movies.model.response.TvDetailsResponse" />

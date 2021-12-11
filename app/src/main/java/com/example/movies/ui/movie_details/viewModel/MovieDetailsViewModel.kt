@@ -30,9 +30,6 @@ class MovieDetailsViewModel @Inject constructor(private val repository: MovieDet
                         val data = it.data
                         it.data.year = MediaUtils.extractYearFromDate(data.year)
                         it.data.length = MediaUtils.formatMovieLength(data.length)
-                        it.data.backdrop = MediaUtils.addBackdropPrefixPath(data.backdrop)
-                        it.data.poster = MediaUtils.addPrefixPath(data.poster)
-                        it.data.credits?.casts=MediaUtils.extractCastsPictures(data.credits?.casts)
                     }
                 }.launchIn(viewModelScope)
         }

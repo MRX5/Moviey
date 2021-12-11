@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
-import com.example.movies.databinding.FragmentTopRatedMoviesBinding
 
 class SplashFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_popularMoviesFragment)
+            findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
         }, 2000)
     }
 

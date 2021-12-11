@@ -10,63 +10,70 @@ class MediaUtils {
 
         fun convert(movies: List<Movie>): List<Movie> {
             movies.forEach {
-                it.poster = Constants.TMDB_IMAGE_PATH + it.poster
                 it.release_date = it.release_date?.substring(0, 4)
             }
             return movies
         }
 
+        fun convertTvShows(tvShows: List<TV_Show>): List<TV_Show> {
+            tvShows.forEach {
+                it.release_date = it.release_date?.substring(0, 4)
+            }
+            return tvShows
+        }
+
         fun extractYearFromDate(date: String?): String {
             date?.let {
-                return if(it.isNotEmpty())it.substring(0,4) else "No date"
-            }?:return "No date"
+                return if (it.isNotEmpty()) it.substring(0, 4) else "No date"
+            } ?: return "No date"
         }
 
         fun formatMovieLength(minutes: String?): String {
-            return if(minutes!=null){
+            return if (minutes != null) {
                 val hours = minutes.toInt() / 60
                 val min = minutes.toInt() % 60
                 if (hours == 0) "${min}m"
                 else "${hours}h ${min}m"
-            }else{
+            } else {
                 "0h 0m"
             }
         }
 
-        fun addPrefixPath(url: String?)=Constants.TMDB_IMAGE_PATH+url
-        fun addBackdropPrefixPath(url:String?)=Constants.TMDB_BACKDROP_PATH+url
+        fun addPrefixPath(url: String?) = Constants.TMDB_IMAGE_PATH + url
+        fun addBackdropPrefixPath(url: String?) = Constants.TMDB_BACKDROP_PATH + url
 
-        fun extractGenresNames(genres:List<Genres>): String {
-            val result=StringBuilder("")
-            for(idx in 0..(genres.size - 1).coerceAtMost(2)){
-                result.append(genres[idx].name+", ")
+        fun extractGenresNames(genres: List<Genres>): String {
+            val result = StringBuilder("")
+            for (idx in 0..(genres.size - 1).coerceAtMost(2)) {
+                result.append(genres[idx].name + ", ")
             }
-            return if(result.isNotEmpty()&&result.last().isWhitespace()) result.dropLast(2).toString()
+            return if (result.isNotEmpty() && result.last().isWhitespace()) result.dropLast(2)
+                .toString()
             else result.toString()
         }
 
         fun extractCastsPictures(casts: List<Cast>?): List<Cast> {
             casts?.forEach {
-                it.profilePicture= addPrefixPath(it.profilePicture)
-            }?:return emptyList()
+                it.profilePicture = addPrefixPath(it.profilePicture)
+            } ?: return emptyList()
             return casts
         }
 
         fun extractYoutubeLink(videos: Video?): String {
-             videos?.let {
-                it.results.forEach { current->
-                    if(current.type=="Trailer"){
-                        return Constants.YOUTUBE_PATH+current.key
+            videos?.let {
+                it.results.forEach { current ->
+                    if (current.type == "Trailer") {
+                        return Constants.YOUTUBE_PATH + current.key
                     }
                 }
             }
             return ""
         }
 
-        fun covertGenresIdToName(genres:List<Int>?):String{
-            var result=""
-            var cnt=2
-            if(genres!=null) {
+        fun covertGenresIdToName(genres: List<Int>?): String {
+            var result = ""
+            var cnt = 2
+            if (genres != null) {
                 for (idx in genres.indices) {
                     when (genres[idx]) {
                         28 -> result += ", " + "Action"
@@ -101,32 +108,34 @@ class MediaUtils {
                     else break
                 }
                 if (result.isNotEmpty()) result = result.drop(2) // remove ", " from result
-                else result="No genres"
+                else result = "No genres"
             }
             return result
         }
 
         fun getActualRate(vote: Double?): Float {
             return vote?.let {
-                 (vote/2).toFloat()
-            }?:0.0f
+                (vote / 2).toFloat()
+            } ?: 0.0f
         }
 
         fun filterMediaType(mediaList: List<Media>): List<Media> {
             return mediaList.filter {
-               it.media_type!="person"
-           }
+                it.media_type != "person"
+            }
         }
 
-        fun filterSeasonList(seasons: List<Season>): List<Season> {
-             val filteredList=seasons.filter {
-                 it.season_number!=0 && it.episode_count!="0"
-             }
-             filteredList.map {
-                 it.episode_count=it.episode_count+" Episodes"
-                 it.air_date= extractYearFromDate(it.air_date)
-             }
+        fun convertAndFilterSeasonList(seasons: List<Season>): List<Season> {
+            val filteredList = seasons.filter {
+                it.season_number != 0 && it.episode_count != "0"
+            }
+            filteredList.map {
+                it.episode_count = it.episode_count + " Episodes"
+                it.air_date = extractYearFromDate(it.air_date)
+            }
             return filteredList
         }
     }
+
+
 }

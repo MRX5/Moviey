@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/card_background"
-        app:cardCornerRadius="2dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-black"
-                    android:maxWidth="100dp"
+                    android:maxWidth="110dp"
                     android:maxLines="1"
                     android:text="@{movie.title}"
                     android:textColor="@color/white"

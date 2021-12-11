@@ -31,7 +31,7 @@ class RelatedMoviesAdapter(private val listener:MediaClickListener) :
     override fun getItemCount()=recommendationsList.size
 
     fun setData(movies:List<Movie>){
-        recommendationsList= movies as MutableList<Movie>
+        recommendationsList= MediaUtils.convert(movies) as MutableList<Movie>
         notifyDataSetChanged()
     }
 

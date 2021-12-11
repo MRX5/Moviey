@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(binding.mainToolbar)
+        setSupportActionBar(binding.contentMain.mainToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(true)
     }
 
@@ -48,7 +48,8 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
     private fun setupNavigationDrawable() {
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
-           setOf( R.id.popularMoviesFragment,
+           setOf(R.id.homeFragment,
+            R.id.popularMoviesFragment,
             R.id.upcomingMoviesFragment,
             R.id.topRatedMoviesFragment), binding.drawableLayout)
         binding.navigationView.setupWithNavController(navController)
@@ -82,11 +83,10 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
         arguments: Bundle?) {
         when(destination.id){
             R.id.splashFragment -> {
-                binding.mainToolbar.visibility = GONE
+                binding.contentMain.mainToolbar.visibility = GONE
             }
             else-> {
-                binding.mainToolbar.visibility= VISIBLE
-
+                binding.contentMain.mainToolbar.visibility= VISIBLE
             }
         }
     }

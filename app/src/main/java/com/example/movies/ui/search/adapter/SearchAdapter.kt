@@ -1,5 +1,6 @@
 package com.example.movies.ui.search.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -58,7 +59,6 @@ class SearchAdapter(private val listener: MediaClickListener) :
             binding.media = media
             binding.genres = MediaUtils.covertGenresIdToName(media.genre_ids)
             binding.rateBar.rating = MediaUtils.getActualRate(media.vote)
-
             binding.root.setOnClickListener {
                 if(media.media_type==Constants.MOVIE){
                     listener.onItemClick(Constants.MOVIE,media.id)

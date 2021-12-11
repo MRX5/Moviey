@@ -11,6 +11,9 @@ import retrofit2.http.Query
 
 interface ApiService {
 
+    @GET("trending/movie/week")
+    suspend fun getTrendingMovies(@Query("page") page:Int):Response<MoviesResponse>
+
     @GET("movie/popular")
      suspend fun getPopularMovies(@Query("page") page:Int): Response<MoviesResponse>
 
@@ -34,4 +37,5 @@ interface ApiService {
         @Path("tv_id") tvID:Int,
         @Query("append_to_response") pr:List<String> = listOf("credits,videos,recommendations"))
             :Response<TvDetailsResponse>
+
 }

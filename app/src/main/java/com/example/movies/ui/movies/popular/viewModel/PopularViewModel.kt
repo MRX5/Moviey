@@ -26,5 +26,4 @@ class PopularViewModel @Inject constructor(private val repository: PopularMovies
                 }.launchIn(viewModelScope)
         }
     }
-
 }

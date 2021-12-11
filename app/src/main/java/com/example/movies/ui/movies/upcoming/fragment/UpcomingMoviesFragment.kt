@@ -94,4 +94,9 @@ class UpcomingMoviesFragment : Fragment(), MediaClickListener {
         }
         startActivity(intent)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Toast.makeText(context,"destroy",Toast.LENGTH_SHORT).show()
+    }
 }

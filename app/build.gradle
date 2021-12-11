@@ -42,6 +42,7 @@ android {
     kapt {
         correctErrorTypes true
     }
+
 }
 
 dependencies {
@@ -76,6 +77,7 @@ dependencies {
 
     //Image Slider
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'

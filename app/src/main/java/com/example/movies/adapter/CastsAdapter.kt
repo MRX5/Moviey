@@ -21,7 +21,6 @@ class CastsAdapter : RecyclerView.Adapter<CastsAdapter.CastViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: CastViewHolder, position: Int) {
-        Log.d("mostafa", "onBind: ${castsList[position].profilePicture}")
         holder.bind(castsList[position])
     }
 

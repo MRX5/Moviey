@@ -3,6 +3,7 @@ package com.example.movies.ui.movies.popular.fragment
 import GridSpacingItemDecoration
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,17 +17,21 @@ import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
 import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.FragmentPopularMoviesBinding
+import com.example.movies.model.response.MoviesResponse
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.ui.movies.popular.viewModel.PopularViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
+import com.google.android.material.navigation.NavigationView
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+private const val TAG = "PopularMoviesFragmentmostafa"
 @AndroidEntryPoint
-class PopularMoviesFragment : Fragment(), MediaClickListener {
+class PopularMoviesFragment : Fragment(), MediaClickListener{
      lateinit var binding: FragmentPopularMoviesBinding
     private val viewModel: PopularViewModel by viewModels()
     private val moviesAdapter by lazy { MoviesAdapter(requireContext(), this) }
@@ -65,8 +70,7 @@ class PopularMoviesFragment : Fragment(), MediaClickListener {
     }
 
     private fun fetchMovies() {
-        viewModel.fetchPopularMovies(page)
-
+         viewModel.fetchPopularMovies(page)
         lifecycleScope.launch {
             viewModel.movies.collect {
                 when(it){
@@ -93,5 +97,4 @@ class PopularMoviesFragment : Fragment(), MediaClickListener {
         }
         startActivity(intent)
     }
-
 }

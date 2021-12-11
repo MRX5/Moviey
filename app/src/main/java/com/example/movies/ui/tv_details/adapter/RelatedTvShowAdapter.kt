@@ -33,7 +33,7 @@ class RelatedTvShowAdapter(private val listener:MediaClickListener) :
     override fun getItemCount()=recommendationsList.size
 
     fun setData(tvShows:List<TV_Show>){
-        recommendationsList= tvShows as MutableList<TV_Show>
+        recommendationsList= MediaUtils.convertTvShows(tvShows) as MutableList<TV_Show>
         notifyDataSetChanged()
     }
 

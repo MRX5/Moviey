@@ -9,6 +9,9 @@ import javax.inject.Inject
 
 class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiService):RemoteDataSource {
 
+    override suspend fun getTrendingMovies(page: Int): Response<MoviesResponse> =
+        apiService.getTrendingMovies(page)
+
     override suspend fun getPopularMovies(page: Int): Response<MoviesResponse> =
         apiService.getPopularMovies(page)
 

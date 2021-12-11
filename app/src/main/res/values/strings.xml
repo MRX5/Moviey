@@ -5,6 +5,7 @@
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
     <string name="search">Search</string>
+    <string name="trending_movies">Trending Movies</string>
     <string name="popular_movies">Popular Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="top_rated_movies">TopRated Movies</string>

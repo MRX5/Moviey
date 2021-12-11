@@ -4,26 +4,29 @@
     tools:ignore="HardcodedText">
     <group
         android:id="@+id/group1">
-        <item
-            android:id="@+id/subtitle"
-            android:title="Movies">
-            <menu>
                 <item
+                    android:checkable="true"
+                    android:id="@+id/homeFragment"
+                    android:icon="@drawable/icon_tv_shows"
+                    android:title="Home" />
+                <item
+                    android:checkable="true"
                     android:id="@+id/popularMoviesFragment"
                     android:icon="@drawable/icon_popular"
                     android:title="Popular" />
 
                 <item
+                    android:checkable="true"
                     android:id="@+id/upcomingMoviesFragment"
                     android:icon="@drawable/icon_upcoming"
                     android:title="Upcoming" />
 
                 <item
+                    android:checkable="true"
                     android:id="@+id/topRatedMoviesFragment"
                     android:icon="@drawable/icon_top_rate"
                     android:title="Top Rated" />
-            </menu>
-        </item>
+
     </group>
 
     <group android:id="@+id/group2">

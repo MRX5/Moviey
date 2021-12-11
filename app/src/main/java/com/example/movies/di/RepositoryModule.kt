@@ -1,6 +1,8 @@
 package com.example.movies.di
 
 import com.example.movies.network.RemoteDataSource
+import com.example.movies.ui.home.repo.HomeRepository
+import com.example.movies.ui.home.repo.HomeRepositoryImpl
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepository
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepositoryImpl
 import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
@@ -21,6 +23,10 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 @Module
 @InstallIn(ActivityRetainedComponent::class)
 object RepositoryModule {
+
+    @Provides
+    fun provideHomeMoviesRepository(remoteDataSource: RemoteDataSource): HomeRepository =
+        HomeRepositoryImpl(remoteDataSource)
 
     @Provides
     fun providePopularMoviesRepository(remoteDataSource: RemoteDataSource): PopularMoviesRepository =
