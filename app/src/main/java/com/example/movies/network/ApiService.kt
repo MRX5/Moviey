@@ -14,6 +14,9 @@ interface ApiService {
     @GET("trending/movie/week")
     suspend fun getTrendingMovies(@Query("page") page:Int):Response<MoviesResponse>
 
+    @GET("movie/now_playing")
+    suspend fun getInTheaterMovies(@Query("page") page:Int):Response<MoviesResponse>
+    
     @GET("movie/popular")
      suspend fun getPopularMovies(@Query("page") page:Int): Response<MoviesResponse>
 

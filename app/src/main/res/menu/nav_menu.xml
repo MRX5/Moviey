@@ -2,58 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="HardcodedText">
-    <group
-        android:id="@+id/group1">
-                <item
-                    android:checkable="true"
-                    android:id="@+id/homeFragment"
-                    android:icon="@drawable/icon_tv_shows"
-                    android:title="Home" />
-                <item
-                    android:checkable="true"
-                    android:id="@+id/popularMoviesFragment"
-                    android:icon="@drawable/icon_popular"
-                    android:title="Popular" />
 
-                <item
-                    android:checkable="true"
-                    android:id="@+id/upcomingMoviesFragment"
-                    android:icon="@drawable/icon_upcoming"
-                    android:title="Upcoming" />
+    <item
+        android:id="@+id/homeFragment"
+        android:checkable="true"
+        android:icon="@drawable/icon_home"
+        android:title="Home" />
 
-                <item
-                    android:checkable="true"
-                    android:id="@+id/topRatedMoviesFragment"
-                    android:icon="@drawable/icon_top_rate"
-                    android:title="Top Rated" />
+    <item
+        android:id="@+id/moviesFragment"
+        android:checkable="true"
+        android:icon="@drawable/icon_movies"
+        android:title="Movies" />
 
-    </group>
+    <item
+        android:id="@+id/tvShowsFragment"
+        android:checkable="true"
+        android:icon="@drawable/icon_tv_shows"
+        android:title="TvShows" />
 
-    <group android:id="@+id/group2">
-        <item
-            android:id="@+id/subtitle2"
-            android:title="TV Shows">
-            <menu>
-                <item
-                    android:icon="@drawable/icon_popular"
-                    android:title="Popular" />
-
-                <item
-                    android:id="@+id/TvFragment"
-                    android:icon="@drawable/icon_upcoming"
-                    android:title="Upcoming" />
-
-                <item
-                    android:icon="@drawable/icon_top_rate"
-                    android:title="Top Rated" />
-            </menu>
-        </item>
-    </group>
-
-    <group android:id="@+id/group3">
-        <item
-            android:id="@+id/searchActivity"
-            android:icon="@drawable/icon_search"
-            android:title="Search" />
-    </group>
+    <item
+        android:id="@+id/searchActivity"
+        android:icon="@drawable/icon_search"
+        android:title="Search" />
 </menu>

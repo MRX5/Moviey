@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // movie card portrait
-    <dimen name="movie_card_image_width_portrait">125dp</dimen>
-    <dimen name="movie_card_image_height_portrait">180dp</dimen>
+    <dimen name="movie_card_image_width_portrait">120dp</dimen>
+    <dimen name="movie_card_image_height_portrait">170dp</dimen>
 
     // movie card landscape
     <dimen name="movie_card_image_width_landscape">240dp</dimen>

@@ -10,11 +10,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.children
-import androidx.core.view.get
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.MediaClickListener
@@ -24,11 +21,8 @@ import com.example.movies.ui.home.viewModel.HomeViewModel
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
-import com.rd.animation.type.AnimationType
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
-import com.smarteist.autoimageslider.SliderViewAdapter
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -38,7 +32,8 @@ class HomeFragment : Fragment(),MediaClickListener {
     private val sliderAdapter by lazy { SliderAdapter() }
     private val viewModel:HomeViewModel by viewModels()
     private val upcomingMoviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
-    private val topRatedMoviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
+    private val popularMoviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
+    private val page=1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +49,7 @@ class HomeFragment : Fragment(),MediaClickListener {
         setupRecyclerViews()
         fetchTrendingMovies()
         fetchUpcomingMovies()
-        fetchTopRatedMovies()
+        fetchPopularMovies()
         fetchTrendingTvShows()
     }
 
@@ -78,13 +73,13 @@ class HomeFragment : Fragment(),MediaClickListener {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(LinearSpacingItemDecoration(context,LinearLayoutManager.HORIZONTAL))
             setHasFixedSize(true)
-            adapter = topRatedMoviesAdapter
+            adapter = popularMoviesAdapter
         }
     }
 
     private fun fetchTrendingMovies() {
         if(viewModel.trendingMovies.value !is DataState.Success)
-            viewModel.fetchTrendingMovies(1)
+            viewModel.fetchTrendingMovies(page)
 
         lifecycleScope.launchWhenCreated {
             viewModel.trendingMovies.collect {
@@ -110,7 +105,7 @@ class HomeFragment : Fragment(),MediaClickListener {
 
     private fun fetchUpcomingMovies() {
         if(viewModel.upcomingMovies.value !is DataState.Success)
-            viewModel.fetchUpcomingMovies(1)
+            viewModel.fetchUpcomingMovies(page)
 
         lifecycleScope.launchWhenCreated {
             viewModel.upcomingMovies.collect {
@@ -129,17 +124,17 @@ class HomeFragment : Fragment(),MediaClickListener {
         }
     }
 
-    private fun fetchTopRatedMovies() {
-        if(viewModel.topRatedMovies.value !is DataState.Success)
-            viewModel.fetchTopRatedMovies(1)
+    private fun fetchPopularMovies() {
+        if(viewModel.popularMovies.value !is DataState.Success)
+            viewModel.fetchPopularMovies(page)
 
         lifecycleScope.launchWhenCreated {
-            viewModel.topRatedMovies.collect {
+            viewModel.popularMovies.collect {
                 when(it){
                     is DataState.Loading->{
                     }
                     is DataState.Success -> {
-                        topRatedMoviesAdapter.setData(it.data.results)
+                        popularMoviesAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
                       //  binding.moviesProgressBar.visibility = View.GONE

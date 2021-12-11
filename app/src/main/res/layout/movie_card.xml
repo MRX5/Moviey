@@ -59,7 +59,7 @@
                     android:maxLines="1"
                     android:text="@{movie.title}"
                     android:textColor="@color/white"
-                    android:textSize="10sp" />
+                    android:textSize="12sp" />
 
                 <TextView
                     android:id="@+id/details_tv_year"

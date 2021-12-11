@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface HomeRepository {
     suspend fun getTrendingMovies(page:Int): Flow<DataState<MoviesResponse>>
     suspend fun getUpcomingMovies(page:Int): Flow<DataState<MoviesResponse>>
-    suspend fun getTopRatedMovies(page:Int): Flow<DataState<MoviesResponse>>
+    suspend fun getPopularMovies(page:Int): Flow<DataState<MoviesResponse>>
 }

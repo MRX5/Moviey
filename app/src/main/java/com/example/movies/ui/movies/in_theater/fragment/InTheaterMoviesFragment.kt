@@ -1,4 +1,4 @@
-package com.example.movies.ui.movies.upcoming.fragment
+package com.example.movies.ui.movies.in_theater.fragment
 
 import GridSpacingItemDecoration
 import android.content.Intent
@@ -14,12 +14,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
 import com.example.movies.adapter.MediaClickListener
-import com.example.movies.databinding.FragmentPopularMoviesBinding
-import com.example.movies.databinding.FragmentUpcomingMoviesBinding
+import com.example.movies.databinding.FragmentInTheaterMoviesBinding
+import com.example.movies.databinding.FragmentTrendingMoviesBinding
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.adapter.MoviesAdapter
-import com.example.movies.ui.movies.popular.viewModel.PopularViewModel
-import com.example.movies.ui.movies.upcoming.viewModel.UpcomingViewModel
+import com.example.movies.ui.movies.in_theater.viewModel.InTheaterViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,10 +26,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class UpcomingMoviesFragment : Fragment(), MediaClickListener {
-     lateinit var binding: FragmentUpcomingMoviesBinding
-    private val viewModel: UpcomingViewModel by viewModels()
-    private val moviesAdapter by lazy { MoviesAdapter(requireContext(), this) }
+class InTheaterMoviesFragment : Fragment(),MediaClickListener {
+    lateinit var binding:FragmentInTheaterMoviesBinding
+    private val viewModel:InTheaterViewModel by viewModels()
+    private val moviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
     private var page: Int = 1
     private var totalPages: Int = 0
 
@@ -38,12 +37,13 @@ class UpcomingMoviesFragment : Fragment(), MediaClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentUpcomingMoviesBinding.inflate(inflater, container, false)
+        binding= FragmentInTheaterMoviesBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
         fetchMovies()
     }
@@ -66,8 +66,7 @@ class UpcomingMoviesFragment : Fragment(), MediaClickListener {
     }
 
     private fun fetchMovies() {
-        viewModel.fetchUpcomingMovies(page)
-
+        viewModel.fetchInTheaterMovies(page)
         lifecycleScope.launch {
             viewModel.movies.collect {
                 when(it){
@@ -89,13 +88,9 @@ class UpcomingMoviesFragment : Fragment(), MediaClickListener {
     }
 
     override fun onItemClick(mediaType: String, mediaID: Int) {
-        val intent=Intent(context,MovieDetailsActivity::class.java).apply {
+        val intent= Intent(context, MovieDetailsActivity::class.java).apply {
             putExtra(Constants.MOVIE_ID,mediaID)
         }
         startActivity(intent)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

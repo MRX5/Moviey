@@ -23,8 +23,8 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private var _upcomingMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
     val upcomingMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _upcomingMovies
 
-    private var _topRatedMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
-    val topRatedMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _topRatedMovies
+    private var _popularMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
+    val popularMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _popularMovies
 
     fun fetchTrendingMovies(page:Int) {
         viewModelScope.launch {
@@ -42,10 +42,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         }
     }
 
-    fun fetchTopRatedMovies(page: Int) {
+    fun fetchPopularMovies(page: Int) {
         viewModelScope.launch {
-            repository.getTopRatedMovies(page).onEach {
-                _topRatedMovies.value=it
+            repository.getPopularMovies(page).onEach {
+                _popularMovies.value=it
             }.launchIn(viewModelScope)
         }
     }

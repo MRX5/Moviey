@@ -26,11 +26,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListener{
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     lateinit var binding: ActivityMainBinding
     lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var navController:NavController
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,25 +48,27 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
     private fun setupNavigationDrawable() {
         navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
-           setOf(R.id.homeFragment,
-            R.id.popularMoviesFragment,
-            R.id.upcomingMoviesFragment,
-            R.id.topRatedMoviesFragment), binding.drawableLayout)
+            setOf(
+                R.id.homeFragment,
+                R.id.moviesFragment,
+                R.id.tvShowsFragment,
+                R.id.searchActivity
+            ), binding.drawableLayout
+        )
         binding.navigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(this)
-        setupActionBarWithNavController(navController,appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navigationView.setupWithNavController(navController)
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_menu,menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==R.id.action_search){
+        if (item.itemId == R.id.action_search) {
             navController.navigate(R.id.searchActivity)
             return true
         }
@@ -80,13 +82,14 @@ class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListe
     override fun onDestinationChanged(
         controller: NavController,
         destination: NavDestination,
-        arguments: Bundle?) {
-        when(destination.id){
+        arguments: Bundle?
+    ) {
+        when (destination.id) {
             R.id.splashFragment -> {
                 binding.contentMain.mainToolbar.visibility = GONE
             }
-            else-> {
-                binding.contentMain.mainToolbar.visibility= VISIBLE
+            else -> {
+                binding.contentMain.mainToolbar.visibility = VISIBLE
             }
         }
     }

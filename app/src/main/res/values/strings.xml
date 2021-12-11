@@ -9,5 +9,8 @@
     <string name="popular_movies">Popular Movies</string>
     <string name="upcoming_movies">Upcoming Movies</string>
     <string name="top_rated_movies">TopRated Movies</string>
+    <string name="in_theatres">In Theatres</string>
+    <string name="see_more">See more</string>
+    <string name="trending">Trending</string>
 
 </resources>

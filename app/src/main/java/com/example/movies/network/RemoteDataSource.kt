@@ -8,6 +8,7 @@ import retrofit2.Response
 
 interface RemoteDataSource {
     //Movies
+    suspend fun getInTheaterMovies(page:Int):Response<MoviesResponse>
     suspend fun getTrendingMovies(page:Int):Response<MoviesResponse>
     suspend fun getPopularMovies(page: Int): Response<MoviesResponse>
     suspend fun getUpcomingMovies(page: Int): Response<MoviesResponse>
