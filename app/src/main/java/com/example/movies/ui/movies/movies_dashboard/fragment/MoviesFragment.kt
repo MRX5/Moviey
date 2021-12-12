@@ -193,6 +193,7 @@ class MoviesFragment : Fragment() , MediaClickListener,SeeMoreClickListener{
         }
     }
     override fun onItemClick(mediaType: String, mediaID: Int) {
+        
     }
 
     override fun openInTheaterFragment() {

@@ -1,7 +1,6 @@
 package com.example.movies.ui.search.repo
 
-import android.util.Log
-import com.example.movies.model.response.SearchResponse
+import com.example.movies.model.response.MediaResponse
 import com.example.movies.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.FlowPreview
@@ -15,7 +14,7 @@ class SearchRepositoryImpl @Inject constructor(private val remoteDataSource: Rem
     SearchRepository {
 
     @FlowPreview
-    override suspend fun search(query: String, page:Int): Flow<DataState<SearchResponse>> =
+    override suspend fun search(query: String, page:Int): Flow<DataState<MediaResponse>> =
         flow {
             emit(DataState.Loading)
             try {

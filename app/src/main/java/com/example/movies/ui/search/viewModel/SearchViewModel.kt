@@ -2,7 +2,7 @@ package com.example.movies.ui.search.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.response.SearchResponse
+import com.example.movies.model.response.MediaResponse
 import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(private val repository: SearchRepository):ViewModel() {
-    private val _media = MutableStateFlow<DataState<SearchResponse>>(DataState.Idle)
-    val media: MutableStateFlow<DataState<SearchResponse>> get() = _media
+    private val _media = MutableStateFlow<DataState<MediaResponse>>(DataState.Idle)
+    val media: MutableStateFlow<DataState<MediaResponse>> get() = _media
 
     fun search(query:String,page:Int){
         viewModelScope.launch {

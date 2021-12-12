@@ -1,9 +1,6 @@
 package com.example.movies.network
 
-import com.example.movies.model.response.MovieDetailsResponse
-import com.example.movies.model.response.MoviesResponse
-import com.example.movies.model.response.SearchResponse
-import com.example.movies.model.response.TvDetailsResponse
+import com.example.movies.model.response.*
 import retrofit2.Response
 
 interface RemoteDataSource {
@@ -16,9 +13,17 @@ interface RemoteDataSource {
     suspend fun getMovieDetails(movieID:Int):Response<MovieDetailsResponse>
 
     //TV Shows
+    suspend fun getOnTheAirTvShows(page:Int):Response<TvShowsResponse>
+    suspend fun getTrendingTvShows(page:Int):Response<TvShowsResponse>
+    suspend fun getPopularTvShows(page: Int): Response<TvShowsResponse>
+    suspend fun getUpcomingTvShows(page: Int): Response<TvShowsResponse>
+    suspend fun getTopRatedTvShows(page: Int): Response<TvShowsResponse>
     suspend fun getTvShowDetails(tvID:Int):Response<TvDetailsResponse>
 
+    //TvShows And Movies
+    suspend fun getTrendingMoviesAndTvShows(page:Int):Response<MediaResponse>
+
     //Search
-    suspend fun getSearchResults(query:String,page:Int):Response<SearchResponse>
+    suspend fun getSearchResults(query:String,page:Int):Response<MediaResponse>
 
 }

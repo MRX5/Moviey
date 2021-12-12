@@ -3,6 +3,7 @@ package com.example.movies.ui.home.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.model.response.MoviesResponse
+import com.example.movies.model.response.TvShowsResponse
 import com.example.movies.ui.home.repo.HomeRepository
 import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
 import com.example.movies.utils.DataState
@@ -26,6 +27,12 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private var _popularMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
     val popularMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _popularMovies
 
+    private var _trendingTvShows = MutableStateFlow<DataState<TvShowsResponse>>(DataState.Idle)
+    val trendingTvShows: MutableStateFlow<DataState<TvShowsResponse>> get() = _trendingTvShows
+
+    private var _onTheAirTvShows = MutableStateFlow<DataState<TvShowsResponse>>(DataState.Idle)
+    val onTheAirTvShows: MutableStateFlow<DataState<TvShowsResponse>> get() = _onTheAirTvShows
+
     fun fetchTrendingMovies(page:Int) {
         viewModelScope.launch {
             repository.getTrendingMovies(page).onEach {
@@ -46,6 +53,22 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
         viewModelScope.launch {
             repository.getPopularMovies(page).onEach {
                 _popularMovies.value=it
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun fetchTrendingTvShows(page:Int){
+        viewModelScope.launch {
+            repository.getTrendingTvShows(page).onEach {
+                _trendingTvShows.value=it
+            }.launchIn(viewModelScope)
+        }
+    }
+
+    fun fetchOnTheAirTvShows(page:Int){
+        viewModelScope.launch {
+            repository.getOnTheAirTvShows(page).onEach {
+                _onTheAirTvShows.value=it
             }.launchIn(viewModelScope)
         }
     }
