@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -7,7 +7,7 @@
 
         <variable
             name="season"
-            type="com.example.movies.model.entity.Season" />
+            type="com.example.movies.data.model.entity.Season" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="handler"
+            type="com.example.movies.listener.HomeSeeMoreClickListener" />
+    </data>
+
  <FrameLayout
      android:layout_width="match_parent"
      tools:context=".ui.home.fragment.HomeFragment"
@@ -34,7 +41,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="230dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@android:color/transparent"
@@ -80,6 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_more"
+                android:onClick="@{()->handler.openUpcomingMoviesFragment()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView10"
                 app:layout_constraintEnd_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="@+id/textView10" />
@@ -112,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_more"
+                android:onClick="@{()->handler.openPopularMoviesFragment()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="@+id/textView11" />
@@ -144,6 +153,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_more"
+                android:onClick="@{()->handler.openTrendingTvShowsFragment()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -176,6 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/see_more"
+                android:onClick="@{()->handler.openOnTheAirTvShowsFragment()}"
                 app:layout_constraintBottom_toBottomOf="@+id/textView13"
                 app:layout_constraintEnd_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="@+id/textView13" />

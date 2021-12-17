@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.example.movies.R
 import com.example.movies.databinding.SeasonCardBinding
-import com.example.movies.model.entity.Season
+import com.example.movies.data.model.entity.Season
 import com.example.movies.utils.MediaUtils
 
 class SeasonsAdapter : RecyclerView.Adapter<SeasonsAdapter.SeasonViewHolder>() {

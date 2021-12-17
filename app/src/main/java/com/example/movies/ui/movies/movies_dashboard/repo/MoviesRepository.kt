@@ -1,6 +1,6 @@
 package com.example.movies.ui.movies.movies_dashboard.repo
 
-import com.example.movies.model.response.MoviesResponse
+import com.example.movies.data.model.response.MoviesResponse
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.flow.Flow
 

@@ -5,14 +5,14 @@
     <data class="TvShowCardBinding">
         <variable
             name="tvShow"
-            type="com.example.movies.model.entity.TV_Show" />
+            type="com.example.movies.data.model.entity.TV_Show" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/card_background"
-        app:cardCornerRadius="2dp"
+        app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

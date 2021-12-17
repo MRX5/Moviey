@@ -6,7 +6,7 @@
 
         <variable
             name="tvShow"
-            type="com.example.movies.model.entity.TV_Show" />
+            type="com.example.movies.data.model.entity.TV_Show" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

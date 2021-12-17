@@ -1,6 +1,6 @@
 package com.example.movies.ui.movies.in_theater.repo
 
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception

@@ -2,7 +2,7 @@ package com.example.movies.ui.movie_details.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.response.MovieDetailsResponse
+import com.example.movies.data.model.response.MovieDetailsResponse
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepository
 import com.example.movies.utils.DataState
 import com.example.movies.utils.MediaUtils

@@ -10,9 +10,11 @@ object Constants {
     const val POPULAR="Popular"
     const val UPCOMING="Upcoming"
     const val TOP_RATED="Top Rated"
+    const val ON_THE_AIR="On The Air"
+    const val TRENDING="Trending"
     const val MOVIE_ID="movie-id"
     const val TV_ID="tv-id"
     const val MOVIE="movie"
     const val TV="tv"
-    const val CATEGORY="category"
+    const val MediaType="media_type"
 }

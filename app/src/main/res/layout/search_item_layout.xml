@@ -3,7 +3,7 @@
     <data>
         <variable
             name="media"
-            type="com.example.movies.model.entity.Media" />
+            type="com.example.movies.data.model.entity.Media" />
         <variable
             name="genres"
             type="String" />

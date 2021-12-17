@@ -1,7 +1,7 @@
 package com.example.movies.ui.search.repo
 
-import com.example.movies.model.response.MediaResponse
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.model.response.MediaResponse
+import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow

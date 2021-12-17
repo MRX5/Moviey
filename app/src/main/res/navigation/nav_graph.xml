@@ -48,9 +48,6 @@
         <action
             android:id="@+id/action_homeFragment_to_popularMoviesFragment"
             app:destination="@id/popularMoviesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_topRatedMoviesFragment"
-            app:destination="@id/topRatedMoviesFragment" />
 
     </fragment>
 
@@ -77,8 +74,12 @@
 
     <fragment
         android:id="@+id/tvShowsFragment"
-        android:name="com.example.movies.ui.tvShows.tvShows.TvShowsFragment"
-        android:label="TvShows" />
+        android:name="com.example.movies.ui.tvShows.tvShowsDashboard.fragment.TvShowsDashboardFragment"
+        android:label="TvShows" >
+        <action
+            android:id="@+id/action_tvShowsFragment_to_tvShowsContentFragment"
+            app:destination="@id/tvShowsContentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/inTheaterMoviesFragment"
         android:name="com.example.movies.ui.movies.in_theater.fragment.InTheaterMoviesFragment"
@@ -87,5 +88,9 @@
         android:id="@+id/trendingMoviesFragment"
         android:name="com.example.movies.ui.movies.trending.fragment.TrendingMoviesFragment"
         android:label="Trending Movies" />
+    <fragment
+        android:id="@+id/tvShowsContentFragment"
+        android:name="com.example.movies.ui.tvShows.popular.fragment.TvShowsFragment"
+        android:label="TvShowsContentFragment" />
 
 </navigation>

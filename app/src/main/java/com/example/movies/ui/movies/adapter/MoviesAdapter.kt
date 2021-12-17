@@ -6,13 +6,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.MovieCardBinding
-import com.example.movies.model.entity.Movie
-import com.example.movies.utils.Constants
+import com.example.movies.listener.OnMovieClickListener
+import com.example.movies.data.model.entity.Movie
 import com.example.movies.utils.MediaUtils
 
-class MoviesAdapter(val context: Context,val listener: MediaClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
+class MoviesAdapter(val context: Context,val listener: OnMovieClickListener) : RecyclerView.Adapter<MoviesAdapter.MoviesViewHolder>() {
 
     private var moviesList= mutableListOf<Movie>()
 
@@ -38,7 +37,7 @@ class MoviesAdapter(val context: Context,val listener: MediaClickListener) : Rec
         fun bind(movie: Movie) =with(binding){
             this.movie=movie
             binding.root.setOnClickListener {
-                listener.onItemClick(Constants.MOVIE,movie.id)
+                listener.onMovieClick(movie.id)
             }
         }
     }

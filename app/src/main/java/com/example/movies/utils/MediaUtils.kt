@@ -1,7 +1,6 @@
 package com.example.movies.utils
 
-import com.example.movies.model.entity.*
-import java.lang.Exception
+import com.example.movies.data.model.entity.*
 import java.lang.StringBuilder
 
 class MediaUtils {
@@ -10,16 +9,36 @@ class MediaUtils {
 
         fun convert(movies: List<Movie>): List<Movie> {
             movies.forEach {
-                it.release_date = it.release_date?.substring(0, 4)
+                it.release_date = extractYearFromDate(it.release_date)
             }
             return movies
         }
 
         fun convertTvShows(tvShows: List<TV_Show>): List<TV_Show> {
             tvShows.forEach {
-                it.release_date = it.release_date?.substring(0, 4)
+                it.release_date = extractYearFromDate(it.release_date)
             }
             return tvShows
+        }
+
+        fun convertMoviesAndTvShows(mediaList: List<Media>): List<Media> {
+            mediaList.forEach {
+                if (it.media_type == Constants.MOVIE) {
+                    it.release_date = extractYearFromDate(it.release_date)
+                } else {
+                    it.first_air_date = extractYearFromDate(it.first_air_date)
+                }
+            }
+            return mediaList
+        }
+        fun getMediaReleaseDate(media:Media): String {
+            return if(media.media_type==Constants.MOVIE) extractYearFromDate(media.release_date)
+            else extractYearFromDate(media.first_air_date)
+        }
+
+        fun getMediaTitle(media:Media): String {
+            return if(media.media_type==Constants.MOVIE) media.title
+            else media.name
         }
 
         fun extractYearFromDate(date: String?): String {
@@ -39,7 +58,8 @@ class MediaUtils {
             }
         }
 
-        fun addPrefixPath(url: String?) = Constants.TMDB_IMAGE_PATH + url
+        private fun addPrefixPath(url: String?) = Constants.TMDB_IMAGE_PATH + url
+
         fun addBackdropPrefixPath(url: String?) = Constants.TMDB_BACKDROP_PATH + url
 
         fun extractGenresNames(genres: List<Genres>): String {

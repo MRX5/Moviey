@@ -5,15 +5,13 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
-import com.example.movies.databinding.MovieCardBinding
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.TvShowCardBinding
-import com.example.movies.model.entity.Movie
-import com.example.movies.model.entity.TV_Show
+import com.example.movies.data.model.entity.TV_Show
 import com.example.movies.utils.Constants
 import com.example.movies.utils.MediaUtils
 
-class RelatedTvShowAdapter(private val listener:MediaClickListener) :
+class RelatedTvShowAdapter(private val listener: MediaClickListener) :
     RecyclerView.Adapter<RelatedTvShowAdapter.RelatedTvShowViewHolder>() {
 
     private var recommendationsList= mutableListOf<TV_Show>()

@@ -4,7 +4,7 @@
     <data class="CastLayoutBinding">
         <variable
             name="cast"
-            type="com.example.movies.model.entity.Cast" />
+            type="com.example.movies.data.model.entity.Cast" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

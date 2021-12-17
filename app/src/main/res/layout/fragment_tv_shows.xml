@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tvShows.tvShows.TvShowsFragment">
+    tools:context=".ui.tvShows.popular.fragment.TvShowsFragment">
+    <include
+        android:id="@+id/TvShowsContent"
+        layout="@layout/base_fragment_layout"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
 </layout>

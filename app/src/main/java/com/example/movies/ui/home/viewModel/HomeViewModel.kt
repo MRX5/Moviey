@@ -2,10 +2,10 @@ package com.example.movies.ui.home.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.response.MoviesResponse
-import com.example.movies.model.response.TvShowsResponse
+import com.example.movies.data.model.response.MediaResponse
+import com.example.movies.data.model.response.MoviesResponse
+import com.example.movies.data.model.response.TvShowsResponse
 import com.example.movies.ui.home.repo.HomeRepository
-import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,8 +18,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repository: HomeRepository) :
     ViewModel() {
 
-    private var _trendingMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
-    val trendingMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _trendingMovies
+    private var _trending = MutableStateFlow<DataState<MediaResponse>>(DataState.Idle)
+    val trending: MutableStateFlow<DataState<MediaResponse>> get() = _trending
 
     private var _upcomingMovies = MutableStateFlow<DataState<MoviesResponse>>(DataState.Idle)
     val upcomingMovies: MutableStateFlow<DataState<MoviesResponse>> get() = _upcomingMovies
@@ -33,18 +33,18 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository) 
     private var _onTheAirTvShows = MutableStateFlow<DataState<TvShowsResponse>>(DataState.Idle)
     val onTheAirTvShows: MutableStateFlow<DataState<TvShowsResponse>> get() = _onTheAirTvShows
 
-    fun fetchTrendingMovies(page:Int) {
-        viewModelScope.launch {
-            repository.getTrendingMovies(page).onEach {
-                _trendingMovies.value=it
-            }.launchIn(viewModelScope)
-        }
-    }
-
     fun fetchUpcomingMovies(page: Int) {
         viewModelScope.launch {
             repository.getUpcomingMovies(page).onEach {
                 _upcomingMovies.value=it
+            }.launchIn(viewModelScope)
+        }
+    }
+    
+    fun fetchTrendingMoviesAndTvShows(page:Int) {
+        viewModelScope.launch {
+            repository.getTrendingMoviesAndTvShows(page).onEach {
+                _trending.value=it
             }.launchIn(viewModelScope)
         }
     }

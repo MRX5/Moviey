@@ -1,13 +1,8 @@
 package com.example.movies.ui.tv_details.repo
 
-import android.util.Log
-import com.example.movies.model.response.TvDetailsResponse
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
-import com.example.movies.utils.MediaUtils
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import java.lang.Exception
 import javax.inject.Inject
 

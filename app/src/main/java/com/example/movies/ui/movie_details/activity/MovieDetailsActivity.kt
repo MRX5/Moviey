@@ -13,9 +13,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.ActivityMovieDetailsBinding
-import com.example.movies.model.response.MovieDetailsResponse
+import com.example.movies.data.model.response.MovieDetailsResponse
 import com.example.movies.adapter.CastsAdapter
 import com.example.movies.ui.movie_details.adapter.RelatedMoviesAdapter
 import com.example.movies.ui.movie_details.viewModel.MovieDetailsViewModel
@@ -23,7 +23,6 @@ import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import com.example.movies.utils.MediaUtils
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

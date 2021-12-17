@@ -2,7 +2,7 @@ package com.example.movies.ui.movies.movies_dashboard.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.response.MoviesResponse
+import com.example.movies.data.model.response.MoviesResponse
 import com.example.movies.ui.movies.movies_dashboard.repo.MoviesRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel

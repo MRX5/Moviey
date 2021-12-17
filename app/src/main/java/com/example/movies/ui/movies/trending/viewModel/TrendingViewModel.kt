@@ -1,9 +1,7 @@
 package com.example.movies.ui.movies.trending.viewModel
 
-import android.util.Log
 import androidx.lifecycle.*
-import com.example.movies.model.response.MoviesResponse
-import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
+import com.example.movies.data.model.response.MoviesResponse
 import com.example.movies.ui.movies.trending.repo.TrendingRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel

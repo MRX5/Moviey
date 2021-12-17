@@ -5,14 +5,14 @@
     <data class="MovieCardBinding">
         <variable
             name="movie"
-            type="com.example.movies.model.entity.Movie" />
+            type="com.example.movies.data.model.entity.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/card_background"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="6dp"
         app:cardElevation="2dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

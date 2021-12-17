@@ -3,7 +3,6 @@ package com.example.movies.ui.search.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
@@ -15,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.ActivitySearchBinding
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.search.adapter.SearchAdapter
@@ -25,7 +24,6 @@ import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint

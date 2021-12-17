@@ -1,9 +1,9 @@
 package com.example.movies.di
 
 import com.example.movies.BuildConfig
-import com.example.movies.network.RemoteDataSourceImpl
-import com.example.movies.network.ApiService
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.network.RemoteDataSourceImpl
+import com.example.movies.data.network.ApiService
+import com.example.movies.data.network.RemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,6 +43,7 @@ object NetworkModule {
         }
         return OkHttpClient().newBuilder().addInterceptor(interceptor).build()
     }
+
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)

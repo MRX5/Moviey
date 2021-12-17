@@ -6,12 +6,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
-import com.example.movies.databinding.MovieCardBinding
 import com.example.movies.databinding.TvShowCardBinding
-import com.example.movies.model.entity.Movie
-import com.example.movies.model.entity.TV_Show
-import com.example.movies.utils.Constants
+import com.example.movies.listener.OnTvShowClickListener
+import com.example.movies.data.model.entity.TV_Show
 import com.example.movies.utils.MediaUtils
 
 class TvShowsAdapter(val context: Context, val listener: OnTvShowClickListener) : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {

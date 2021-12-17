@@ -14,9 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
 import com.example.movies.adapter.CastsAdapter
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.ActivityTvDetailsBinding
-import com.example.movies.model.response.TvDetailsResponse
+import com.example.movies.data.model.response.TvDetailsResponse
 import com.example.movies.ui.tv_details.adapter.RelatedTvShowAdapter
 import com.example.movies.ui.tv_details.adapter.SeasonsAdapter
 import com.example.movies.ui.tv_details.viewModel.TvDetailsViewModel
@@ -24,7 +24,6 @@ import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import com.example.movies.utils.MediaUtils
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 

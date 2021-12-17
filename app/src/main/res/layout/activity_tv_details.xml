@@ -4,7 +4,7 @@
     <data class="ActivityTvDetailsBinding">
         <variable
             name="tvShow"
-            type="com.example.movies.model.response.TvDetailsResponse" />
+            type="com.example.movies.data.model.response.TvDetailsResponse" />
 
         <variable
             name="genres"

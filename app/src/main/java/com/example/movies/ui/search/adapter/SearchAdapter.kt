@@ -1,14 +1,13 @@
 package com.example.movies.ui.search.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.SearchItemLayoutBinding
-import com.example.movies.model.entity.Media
+import com.example.movies.data.model.entity.Media
 import com.example.movies.utils.Constants
 import com.example.movies.utils.MediaUtils
 

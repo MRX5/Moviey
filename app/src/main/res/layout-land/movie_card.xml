@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.example.movies.model.entity.Movie" />
+            type="com.example.movies.data.model.entity.Movie" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

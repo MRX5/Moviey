@@ -1,5 +1,6 @@
 package com.example.movies.ui.movies.movies_dashboard.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,24 +12,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
 import com.example.movies.databinding.FragmentMoviesBinding
-import com.example.movies.ui.home.adapter.SliderAdapter
+import com.example.movies.listener.OnMovieClickListener
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.ui.movies.movies_dashboard.viewModel.MoviesViewModel
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
-import com.example.movies.utils.SeeMoreClickListener
+import com.example.movies.listener.MoviesSeeMoreClickListener
+import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
+import com.example.movies.ui.movies.adapter.MoviesSliderAdapter
+import com.example.movies.utils.Constants
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class MoviesFragment : Fragment() , MediaClickListener,SeeMoreClickListener{
+class MoviesFragment : Fragment() , OnMovieClickListener, MoviesSeeMoreClickListener {
     lateinit var binding:FragmentMoviesBinding
     private val viewModel:MoviesViewModel by viewModels()
-    private val inTheaterAdapter by lazy { SliderAdapter() }
+    private val inTheaterAdapter by lazy { MoviesSliderAdapter(this) }
     private val popularAdapter by lazy { MoviesAdapter(requireContext(),this) }
     private val trendingAdapter by lazy { MoviesAdapter(requireContext(),this) }
     private val upcomingAdapter by lazy { MoviesAdapter(requireContext(),this) }
@@ -192,9 +195,8 @@ class MoviesFragment : Fragment() , MediaClickListener,SeeMoreClickListener{
             }
         }
     }
-    override fun onItemClick(mediaType: String, mediaID: Int) {
-        
-    }
+
+
 
     override fun openInTheaterFragment() {
         findNavController().navigate(R.id.action_moviesFragment_to_inTheaterMoviesFragment)
@@ -215,6 +217,13 @@ class MoviesFragment : Fragment() , MediaClickListener,SeeMoreClickListener{
     override fun openTopRatedFragment() {
         findNavController().navigate(R.id.action_moviesFragment_to_topRatedMoviesFragment)
 
+    }
+
+    override fun onMovieClick(movieID: Int) {
+        val intent = Intent(context, MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID, movieID)
+        }
+        startActivity(intent)
     }
 
 

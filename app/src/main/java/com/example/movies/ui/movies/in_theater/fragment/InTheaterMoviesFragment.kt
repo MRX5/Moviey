@@ -11,11 +11,10 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.FragmentInTheaterMoviesBinding
-import com.example.movies.databinding.FragmentTrendingMoviesBinding
+import com.example.movies.listener.OnMovieClickListener
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.ui.movies.in_theater.viewModel.InTheaterViewModel
@@ -26,7 +25,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class InTheaterMoviesFragment : Fragment(),MediaClickListener {
+class InTheaterMoviesFragment : Fragment(), OnMovieClickListener {
     lateinit var binding:FragmentInTheaterMoviesBinding
     private val viewModel:InTheaterViewModel by viewModels()
     private val moviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
@@ -87,9 +86,9 @@ class InTheaterMoviesFragment : Fragment(),MediaClickListener {
         }
     }
 
-    override fun onItemClick(mediaType: String, mediaID: Int) {
+    override fun onMovieClick(movieID: Int) {
         val intent= Intent(context, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID,mediaID)
+            putExtra(Constants.MOVIE_ID,movieID)
         }
         startActivity(intent)
     }

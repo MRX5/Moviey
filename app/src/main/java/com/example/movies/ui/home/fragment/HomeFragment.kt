@@ -1,9 +1,7 @@
 package com.example.movies.ui.home.fragment
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,30 +11,35 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movies.R
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.FragmentHomeBinding
+import com.example.movies.listener.HomeSeeMoreClickListener
+import com.example.movies.listener.OnMovieClickListener
 import com.example.movies.ui.home.adapter.SliderAdapter
 import com.example.movies.ui.home.viewModel.HomeViewModel
 import com.example.movies.ui.movies.adapter.MoviesAdapter
-import com.example.movies.ui.tvShows.adapter.OnTvShowClickListener
+import com.example.movies.listener.OnTvShowClickListener
+import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.tvShows.adapter.TvShowsAdapter
 import com.example.movies.ui.tv_details.activity.TvDetailsActivity
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
-import com.google.android.material.snackbar.Snackbar
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import com.smarteist.autoimageslider.SliderAnimations
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
+class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
+    ,MediaClickListener,HomeSeeMoreClickListener{
+
     lateinit var binding:FragmentHomeBinding
-    private val sliderAdapter by lazy { SliderAdapter() }
     private val viewModel:HomeViewModel by viewModels()
+    private val sliderAdapter by lazy { SliderAdapter(this) }
     private val upcomingMoviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
     private val popularMoviesAdapter by lazy { MoviesAdapter(requireContext(),this) }
     private val trendingTvAdapter by lazy { TvShowsAdapter(requireContext(),this) }
@@ -48,6 +51,7 @@ class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.handler=this
         return binding.root
     }
 
@@ -56,7 +60,7 @@ class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
         setupSliderAdapter()
         setupRecyclerViews()
 
-        fetchTrendingMovies()
+        fetchTrendingMoviesAndTvShows()
         fetchUpcomingMovies()
         fetchPopularMovies()
         fetchTrendingTvShows()
@@ -101,12 +105,12 @@ class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
         }
     }
 
-    private fun fetchTrendingMovies() {
-        if(viewModel.trendingMovies.value !is DataState.Success)
-            viewModel.fetchTrendingMovies(page)
+    private fun fetchTrendingMoviesAndTvShows() {
+        if(viewModel.trending.value !is DataState.Success)
+            viewModel.fetchTrendingMoviesAndTvShows(page)
 
         lifecycleScope.launchWhenCreated {
-            viewModel.trendingMovies.collect {
+            viewModel.trending.collect {
                 when(it){
                     is DataState.Loading->{
                         binding.homeContent.visibility=GONE
@@ -207,6 +211,17 @@ class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
     }
 
     override fun onItemClick(mediaType: String, mediaID: Int) {
+        val intent: Intent
+        if (mediaType == Constants.MOVIE) {
+            intent = Intent(context, MovieDetailsActivity::class.java).apply {
+                putExtra(Constants.MOVIE_ID, mediaID)
+            }
+        } else {
+            intent = Intent(context, TvDetailsActivity::class.java).apply {
+                putExtra(Constants.TV_ID, mediaID)
+            }
+        }
+        startActivity(intent)
     }
 
     override fun onTvShowClick(tvShowID: Int) {
@@ -214,5 +229,26 @@ class HomeFragment : Fragment(),MediaClickListener,OnTvShowClickListener {
             putExtra(Constants.TV_ID, tvShowID)
         }
         startActivity(intent)
+    }
+
+    override fun onMovieClick(movieID: Int) {
+        val intent = Intent(context, MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID, movieID)
+        }
+        startActivity(intent)
+    }
+
+    override fun openUpcomingMoviesFragment() {
+        findNavController().navigate(R.id.action_homeFragment_to_upcomingMoviesFragment)
+    }
+
+    override fun openPopularMoviesFragment() {
+        findNavController().navigate(R.id.action_homeFragment_to_popularMoviesFragment)
+    }
+
+    override fun openTrendingTvShowsFragment() {
+    }
+
+    override fun openOnTheAirTvShowsFragment() {
     }
 }

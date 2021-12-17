@@ -3,7 +3,6 @@ package com.example.movies.ui.movies.popular.fragment
 import GridSpacingItemDecoration
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,27 +10,23 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
-import com.example.movies.adapter.MediaClickListener
+import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.FragmentPopularMoviesBinding
-import com.example.movies.model.response.MoviesResponse
+import com.example.movies.listener.OnMovieClickListener
 import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.ui.movies.popular.viewModel.PopularViewModel
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
-import com.google.android.material.navigation.NavigationView
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "PopularMoviesFragmentmostafa"
 @AndroidEntryPoint
-class PopularMoviesFragment : Fragment(), MediaClickListener{
+class PopularMoviesFragment : Fragment(), OnMovieClickListener {
      lateinit var binding: FragmentPopularMoviesBinding
     private val viewModel: PopularViewModel by viewModels()
     private val moviesAdapter by lazy { MoviesAdapter(requireContext(), this) }
@@ -91,9 +86,9 @@ class PopularMoviesFragment : Fragment(), MediaClickListener{
         }
     }
 
-    override fun onItemClick(mediaType: String, mediaID: Int) {
+    override fun onMovieClick(movieID: Int) {
         val intent= Intent(context, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID,mediaID)
+            putExtra(Constants.MOVIE_ID,movieID)
         }
         startActivity(intent)
     }

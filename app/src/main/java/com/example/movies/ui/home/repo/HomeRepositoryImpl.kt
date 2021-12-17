@@ -1,13 +1,13 @@
 package com.example.movies.ui.home.repo
 
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 
 class HomeRepositoryImpl(private val remoteDataSource: RemoteDataSource) :HomeRepository{
 
-    override suspend fun getTrendingMovies(page:Int) =
+/*    override suspend fun getTrendingMovies(page:Int) =
         flow {
             emit(DataState.Loading)
             try {
@@ -22,7 +22,7 @@ class HomeRepositoryImpl(private val remoteDataSource: RemoteDataSource) :HomeRe
             } catch (e: Exception) {
                 emit(DataState.Error("No internet connection"))
             }
-        }
+        }*/
 
     override suspend fun getPopularMovies(page:Int) =
         flow {

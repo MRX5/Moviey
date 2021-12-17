@@ -1,13 +1,12 @@
 package com.example.movies.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
 import com.example.movies.databinding.CastLayoutBinding
-import com.example.movies.model.entity.Cast
+import com.example.movies.data.model.entity.Cast
 
 class CastsAdapter : RecyclerView.Adapter<CastsAdapter.CastViewHolder>() {
 

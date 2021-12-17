@@ -2,7 +2,7 @@ package com.example.movies.ui.search.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movies.model.response.MediaResponse
+import com.example.movies.data.model.response.MediaResponse
 import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel

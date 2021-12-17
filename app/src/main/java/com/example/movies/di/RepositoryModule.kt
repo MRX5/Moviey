@@ -1,6 +1,6 @@
 package com.example.movies.di
 
-import com.example.movies.network.RemoteDataSource
+import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.ui.home.repo.HomeRepository
 import com.example.movies.ui.home.repo.HomeRepositoryImpl
 import com.example.movies.ui.movie_details.repo.MovieDetailsRepository
@@ -19,6 +19,8 @@ import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepository
 import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepositoryImpl
 import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.ui.search.repo.SearchRepositoryImpl
+import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepository
+import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepositoryImpl
 import com.example.movies.ui.tv_details.repo.TvDetailsRepository
 import com.example.movies.ui.tv_details.repo.TvDetailsRepositoryImpl
 import dagger.Module
@@ -65,6 +67,10 @@ object RepositoryModule {
     @Provides
     fun provideSearchRepository(remoteDataSource: RemoteDataSource):SearchRepository=
         SearchRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideTvShowsDashboardRepository(remoteDataSource: RemoteDataSource):TvShowsDashboardRepository=
+        TvShowsDashboardRepositoryImpl(remoteDataSource)
 
     @Provides
     fun provideTvDetailsRepository(remoteDataSource: RemoteDataSource):TvDetailsRepository=
