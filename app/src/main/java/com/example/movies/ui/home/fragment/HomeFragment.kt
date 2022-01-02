@@ -9,6 +9,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -247,8 +248,12 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
     }
 
     override fun openTrendingTvShowsFragment() {
+        val args= bundleOf(Constants.MediaType to Constants.TRENDING)
+        findNavController().navigate(R.id.action_homeFragment_to_tvShowsFragment,args)
     }
 
     override fun openOnTheAirTvShowsFragment() {
+        val args= bundleOf(Constants.MediaType to Constants.ON_THE_AIR)
+        findNavController().navigate(R.id.action_homeFragment_to_tvShowsFragment,args)
     }
 }

@@ -48,6 +48,9 @@
         <action
             android:id="@+id/action_homeFragment_to_popularMoviesFragment"
             app:destination="@id/popularMoviesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tvShowsFragment"
+            app:destination="@id/tvShowsFragment" />
 
     </fragment>
 
