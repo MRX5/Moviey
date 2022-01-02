@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -94,12 +95,12 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
             dashboardViewModel.trending.collect {
                 when(it){
                     is DataState.Loading->{
-                        binding.moviesScroll.visibility= View.GONE
+                        binding.tvShowsScroll.visibility= View.GONE
                         binding.moviesProgressBar.visibility = View.VISIBLE
                     }
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.tvShowsScroll.visibility= View.VISIBLE
                         trendingAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(trendingAdapter)
                     }
@@ -117,7 +118,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
 
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.tvShowsScroll.visibility= View.VISIBLE
                         popularAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{}
@@ -133,7 +134,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                 when(it){
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.tvShowsScroll.visibility= View.VISIBLE
                         onTheAirAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{ }
@@ -149,7 +150,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                 when(it){
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.tvShowsScroll.visibility= View.VISIBLE
                         topRatedAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{

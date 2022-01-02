@@ -1,14 +1,11 @@
 package com.example.movies.ui.main
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -20,8 +17,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
-import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,7 +45,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.homeFragment,
-                R.id.moviesFragment,
+                R.id.moviesDashboardFragment,
                 R.id.tvShowsFragment,
                 R.id.favouritesFragment,
                 R.id.searchActivity

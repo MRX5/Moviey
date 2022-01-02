@@ -10,16 +10,16 @@
         android:title="Home" />
 
     <item
-        android:id="@+id/moviesFragment"
+        android:id="@+id/moviesDashboardFragment"
         android:checkable="true"
         android:icon="@drawable/icon_movies"
         android:title="Movies" />
 
     <item
-        android:id="@+id/tvShowsFragment"
+        android:id="@+id/tvShowsDashboardFragment"
         android:checkable="true"
         android:icon="@drawable/icon_tv_shows"
-        android:title="TvShows" />
+        android:title="TV Shows" />
 
     <item
         android:id="@+id/favouritesFragment"

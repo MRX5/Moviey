@@ -15,7 +15,7 @@
         tools:context=".ui.tvShows.tvShowsDashboard.fragment.TvShowsDashboardFragment">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/movies_scroll"
+            android:id="@+id/tv_shows_scroll"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

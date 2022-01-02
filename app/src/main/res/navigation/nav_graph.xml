@@ -52,9 +52,9 @@
     </fragment>
 
     <fragment
-        android:id="@+id/moviesFragment"
+        android:id="@+id/moviesDashboardFragment"
         android:name="com.example.movies.ui.movies.movies_dashboard.fragment.MoviesDashboardFragment"
-        android:label="Movies">
+        android:label="Movies Dashboard">
         <action
             android:id="@+id/action_moviesFragment_to_topRatedMoviesFragment"
             app:destination="@id/topRatedMoviesFragment" />
@@ -75,7 +75,7 @@
     <fragment
         android:id="@+id/tvShowsDashboardFragment"
         android:name="com.example.movies.ui.tvShows.tvShowsDashboard.fragment.TvShowsDashboardFragment"
-        android:label="TvShowsDashboard" >
+        android:label="TV Shows Dashboard" >
         <action
             android:id="@+id/action_tvShowsFragment_to_tvShowsContentFragment"
             app:destination="@id/tvShowsFragment" />
@@ -91,7 +91,7 @@
     <fragment
         android:id="@+id/tvShowsFragment"
         android:name="com.example.movies.ui.tvShows.tvShows.fragment.TvShowsFragment"
-        android:label="TvShows" />
+        android:label="TV Shows" />
     <fragment
         android:id="@+id/favouritesFragment"
         android:name="com.example.movies.ui.favourites.fragment.FavouritesFragment"
