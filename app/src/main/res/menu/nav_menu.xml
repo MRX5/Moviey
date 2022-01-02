@@ -22,6 +22,12 @@
         android:title="TvShows" />
 
     <item
+        android:id="@+id/favouritesFragment"
+        android:checkable="true"
+        android:icon="@drawable/icon_favourite_fill"
+        android:title="Favourites"/>
+
+    <item
         android:id="@+id/searchActivity"
         android:icon="@drawable/icon_search"
         android:title="Search" />

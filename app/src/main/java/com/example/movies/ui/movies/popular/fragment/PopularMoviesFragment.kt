@@ -12,10 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movies.adapter.InfiniteScrollListener
-import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.FragmentPopularMoviesBinding
 import com.example.movies.listener.OnMovieClickListener
-import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
+import com.example.movies.ui.movies.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.ui.movies.popular.viewModel.PopularViewModel
 import com.example.movies.utils.Constants

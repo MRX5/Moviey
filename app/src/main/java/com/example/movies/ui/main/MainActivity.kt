@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
                 R.id.homeFragment,
                 R.id.moviesFragment,
                 R.id.tvShowsFragment,
+                R.id.favouritesFragment,
                 R.id.searchActivity
             ), binding.drawableLayout
         )

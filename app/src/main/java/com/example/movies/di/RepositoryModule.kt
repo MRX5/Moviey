@@ -1,10 +1,14 @@
 package com.example.movies.di
 
+import com.example.movies.data.local.FavouriteDao
+import com.example.movies.data.local.source.LocalDataSource
 import com.example.movies.data.network.RemoteDataSource
+import com.example.movies.ui.favourites.repo.FavouritesRepository
+import com.example.movies.ui.favourites.repo.FavouritesRepositoryImpl
 import com.example.movies.ui.home.repo.HomeRepository
 import com.example.movies.ui.home.repo.HomeRepositoryImpl
-import com.example.movies.ui.movie_details.repo.MovieDetailsRepository
-import com.example.movies.ui.movie_details.repo.MovieDetailsRepositoryImpl
+import com.example.movies.ui.movies.movie_details.repo.MovieDetailsRepository
+import com.example.movies.ui.movies.movie_details.repo.MovieDetailsRepositoryImpl
 import com.example.movies.ui.movies.in_theater.repo.InTheaterMoviesRepository
 import com.example.movies.ui.movies.in_theater.repo.InTheaterMoviesRepositoryImpl
 import com.example.movies.ui.movies.movies_dashboard.repo.MoviesRepository
@@ -21,8 +25,8 @@ import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.ui.search.repo.SearchRepositoryImpl
 import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepository
 import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepositoryImpl
-import com.example.movies.ui.tv_details.repo.TvDetailsRepository
-import com.example.movies.ui.tv_details.repo.TvDetailsRepositoryImpl
+import com.example.movies.ui.tvShows.tv_details.repo.TvDetailsRepository
+import com.example.movies.ui.tvShows.tv_details.repo.TvDetailsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -61,8 +65,8 @@ object RepositoryModule {
         TopRatedMoviesRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource): MovieDetailsRepository =
-        MovieDetailsRepositoryImpl(remoteDataSource)
+    fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource): MovieDetailsRepository =
+        MovieDetailsRepositoryImpl(remoteDataSource,localDataSource)
 
     @Provides
     fun provideSearchRepository(remoteDataSource: RemoteDataSource):SearchRepository=
@@ -73,6 +77,10 @@ object RepositoryModule {
         TvShowsDashboardRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideTvDetailsRepository(remoteDataSource: RemoteDataSource):TvDetailsRepository=
-        TvDetailsRepositoryImpl(remoteDataSource)
+    fun provideTvDetailsRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource):TvDetailsRepository=
+        TvDetailsRepositoryImpl(remoteDataSource,localDataSource)
+
+    @Provides
+    fun provideFavouritesRepository(favouriteDao: FavouriteDao):FavouritesRepository =
+        FavouritesRepositoryImpl(favouriteDao)
 }

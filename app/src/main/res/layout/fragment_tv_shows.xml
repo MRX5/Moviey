@@ -6,7 +6,7 @@
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tvShows.popular.fragment.TvShowsFragment">
+    tools:context=".ui.tvShows.tvShows.fragment.TvShowsFragment">
     <include
         android:id="@+id/TvShowsContent"
         layout="@layout/base_fragment_layout"/>

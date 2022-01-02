@@ -18,7 +18,7 @@ import com.example.movies.listener.TvShowsSeeMoreClickListener
 import com.example.movies.ui.tvShows.adapter.TvShowsAdapter
 import com.example.movies.ui.tvShows.adapter.TvShowsSliderAdapter
 import com.example.movies.ui.tvShows.tvShowsDashboard.viewModel.TvShowsDashboardViewModel
-import com.example.movies.ui.tv_details.activity.TvDetailsActivity
+import com.example.movies.ui.tvShows.tv_details.activity.TvDetailsActivity
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration

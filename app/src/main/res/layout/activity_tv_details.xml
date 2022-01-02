@@ -16,13 +16,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.tv_details.activity.TvDetailsActivity">
+        tools:context=".ui.tvShows.tv_details.activity.TvDetailsActivity">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/details_activity_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".ui.movie_details.activity.MediaDetailsActivity">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

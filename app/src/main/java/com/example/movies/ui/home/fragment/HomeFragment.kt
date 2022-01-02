@@ -22,9 +22,9 @@ import com.example.movies.ui.home.adapter.SliderAdapter
 import com.example.movies.ui.home.viewModel.HomeViewModel
 import com.example.movies.ui.movies.adapter.MoviesAdapter
 import com.example.movies.listener.OnTvShowClickListener
-import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
+import com.example.movies.ui.movies.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.tvShows.adapter.TvShowsAdapter
-import com.example.movies.ui.tv_details.activity.TvDetailsActivity
+import com.example.movies.ui.tvShows.tv_details.activity.TvDetailsActivity
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration

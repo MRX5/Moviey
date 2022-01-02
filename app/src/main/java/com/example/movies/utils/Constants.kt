@@ -17,4 +17,5 @@ object Constants {
     const val MOVIE="movie"
     const val TV="tv"
     const val MediaType="media_type"
+    const val DATABASE_NAME="moviey_db"
 }

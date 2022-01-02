@@ -16,10 +16,10 @@ import com.example.movies.R
 import com.example.movies.adapter.InfiniteScrollListener
 import com.example.movies.listener.MediaClickListener
 import com.example.movies.databinding.ActivitySearchBinding
-import com.example.movies.ui.movie_details.activity.MovieDetailsActivity
+import com.example.movies.ui.movies.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.search.adapter.SearchAdapter
 import com.example.movies.ui.search.viewModel.SearchViewModel
-import com.example.movies.ui.tv_details.activity.TvDetailsActivity
+import com.example.movies.ui.tvShows.tv_details.activity.TvDetailsActivity
 import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
