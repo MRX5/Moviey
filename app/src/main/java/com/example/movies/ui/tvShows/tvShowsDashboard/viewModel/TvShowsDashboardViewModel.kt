@@ -3,7 +3,7 @@ package com.example.movies.ui.tvShows.tvShowsDashboard.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movies.data.model.response.TvShowsResponse
-import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepository
+import com.example.movies.ui.tvShows.repository.TvShowsRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TvShowsDashboardViewModel @Inject constructor(private val dashboardRepository: TvShowsDashboardRepository):ViewModel(){
+class TvShowsDashboardViewModel @Inject constructor(private val repository: TvShowsRepository):ViewModel(){
 
     private var _onTheAir = MutableStateFlow<DataState<TvShowsResponse>>(DataState.Idle)
     val onTheAir: MutableStateFlow<DataState<TvShowsResponse>> get() = _onTheAir
@@ -30,7 +30,7 @@ class TvShowsDashboardViewModel @Inject constructor(private val dashboardReposit
 
     fun fetchOnTheAirTvShows(page:Int) {
         viewModelScope.launch {
-            dashboardRepository.getOnTheAirTvShows(page).onEach {
+            repository.getOnTheAirTvShows(page).onEach {
                 _onTheAir.value=it
             }.launchIn(viewModelScope)
         }
@@ -38,7 +38,7 @@ class TvShowsDashboardViewModel @Inject constructor(private val dashboardReposit
 
     fun fetchTrendingTvShows(page:Int) {
         viewModelScope.launch {
-            dashboardRepository.getTrendingTvShows(page).onEach {
+            repository.getTrendingTvShows(page).onEach {
                 _trending.value=it
             }.launchIn(viewModelScope)
         }
@@ -46,7 +46,7 @@ class TvShowsDashboardViewModel @Inject constructor(private val dashboardReposit
 
     fun fetchPopularTvShows(page: Int) {
         viewModelScope.launch {
-            dashboardRepository.getPopularTvShows(page).onEach {
+            repository.getPopularTvShows(page).onEach {
                 _popular.value=it
             }.launchIn(viewModelScope)
         }
@@ -54,7 +54,7 @@ class TvShowsDashboardViewModel @Inject constructor(private val dashboardReposit
 
     fun fetchTopRatedTvShows(page: Int) {
         viewModelScope.launch {
-            dashboardRepository.getTopRatedTvShows(page).onEach {
+            repository.getTopRatedTvShows(page).onEach {
                 _topRated.value=it
             }.launchIn(viewModelScope)
         }

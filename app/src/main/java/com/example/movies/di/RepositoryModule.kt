@@ -9,22 +9,12 @@ import com.example.movies.ui.home.repo.HomeRepository
 import com.example.movies.ui.home.repo.HomeRepositoryImpl
 import com.example.movies.ui.movies.movie_details.repo.MovieDetailsRepository
 import com.example.movies.ui.movies.movie_details.repo.MovieDetailsRepositoryImpl
-import com.example.movies.ui.movies.in_theater.repo.InTheaterMoviesRepository
-import com.example.movies.ui.movies.in_theater.repo.InTheaterMoviesRepositoryImpl
-import com.example.movies.ui.movies.movies_dashboard.repo.MoviesRepository
-import com.example.movies.ui.movies.movies_dashboard.repo.MoviesRepositoryImpl
-import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
-import com.example.movies.ui.movies.popular.repo.PopularMoviesRepositoryImpl
-import com.example.movies.ui.movies.top_rated.repo.TopRatedMoviesRepository
-import com.example.movies.ui.movies.top_rated.repo.TopRatedMoviesRepositoryImpl
-import com.example.movies.ui.movies.trending.repo.TrendingRepository
-import com.example.movies.ui.movies.trending.repo.TrendingRepositoryImpl
-import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepository
-import com.example.movies.ui.movies.upcoming.repo.UpcomingMoviesRepositoryImpl
+import com.example.movies.ui.movies.repository.MoviesRepository
+import com.example.movies.ui.movies.repository.MoviesRepositoryImpl
 import com.example.movies.ui.search.repo.SearchRepository
 import com.example.movies.ui.search.repo.SearchRepositoryImpl
-import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepository
-import com.example.movies.ui.tvShows.tvShowsDashboard.repo.TvShowsDashboardRepositoryImpl
+import com.example.movies.ui.tvShows.repository.TvShowsRepository
+import com.example.movies.ui.tvShows.repository.TvShowsRepositoryImpl
 import com.example.movies.ui.tvShows.tv_details.repo.TvDetailsRepository
 import com.example.movies.ui.tvShows.tv_details.repo.TvDetailsRepositoryImpl
 import dagger.Module
@@ -41,28 +31,8 @@ object RepositoryModule {
         HomeRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideMoviesRepository(remoteDataSource: RemoteDataSource):MoviesRepository=
+    fun provideMoviesRepository(remoteDataSource: RemoteDataSource): MoviesRepository =
         MoviesRepositoryImpl(remoteDataSource)
-
-    @Provides
-    fun provideInTheaterMoviesRepository(remoteDataSource: RemoteDataSource):InTheaterMoviesRepository=
-        InTheaterMoviesRepositoryImpl(remoteDataSource)
-
-    @Provides
-    fun provideTrendingMoviesRepository(remoteDataSource: RemoteDataSource):TrendingRepository=
-        TrendingRepositoryImpl(remoteDataSource)
-
-    @Provides
-    fun providePopularMoviesRepository(remoteDataSource: RemoteDataSource): PopularMoviesRepository =
-        PopularMoviesRepositoryImpl(remoteDataSource)
-
-    @Provides
-    fun provideUpcomingMoviesRepository(remoteDataSource: RemoteDataSource): UpcomingMoviesRepository =
-        UpcomingMoviesRepositoryImpl(remoteDataSource)
-
-    @Provides
-    fun provideTopRatedMoviesRepository(remoteDataSource: RemoteDataSource): TopRatedMoviesRepository =
-        TopRatedMoviesRepositoryImpl(remoteDataSource)
 
     @Provides
     fun provideMoviesDetailsRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource): MovieDetailsRepository =
@@ -73,8 +43,8 @@ object RepositoryModule {
         SearchRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideTvShowsDashboardRepository(remoteDataSource: RemoteDataSource):TvShowsDashboardRepository=
-        TvShowsDashboardRepositoryImpl(remoteDataSource)
+    fun provideTvShowsRepository(remoteDataSource: RemoteDataSource): TvShowsRepository =
+        TvShowsRepositoryImpl(remoteDataSource)
 
     @Provides
     fun provideTvDetailsRepository(remoteDataSource: RemoteDataSource,localDataSource: LocalDataSource):TvDetailsRepository=

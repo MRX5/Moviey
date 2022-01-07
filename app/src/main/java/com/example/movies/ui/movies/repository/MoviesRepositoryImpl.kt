@@ -1,17 +1,17 @@
-package com.example.movies.ui.tvShows.tvShowsDashboard.repo
+package com.example.movies.ui.movies.repository
 
 import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 
-class TvShowsDashboardRepositoryImpl(private val remoteDataSource: RemoteDataSource):TvShowsDashboardRepository {
+class MoviesRepositoryImpl(private val remoteDataSource: RemoteDataSource): MoviesRepository {
 
-    override suspend fun getOnTheAirTvShows(page:Int) =
+    override suspend fun getInTheaterMovies(page:Int) =
         flow {
             emit(DataState.Loading)
             try {
-                val response = remoteDataSource.getOnTheAirTvShows(page)
+                val response = remoteDataSource.getInTheaterMovies(page)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         emit(DataState.Success(it))
@@ -24,11 +24,11 @@ class TvShowsDashboardRepositoryImpl(private val remoteDataSource: RemoteDataSou
             }
         }
 
-    override suspend fun getTrendingTvShows(page:Int) =
+    override suspend fun getTrendingMovies(page:Int) =
         flow {
             emit(DataState.Loading)
             try {
-                val response = remoteDataSource.getTrendingTvShows(page)
+                val response = remoteDataSource.getTrendingMovies(page)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         emit(DataState.Success(it))
@@ -41,11 +41,11 @@ class TvShowsDashboardRepositoryImpl(private val remoteDataSource: RemoteDataSou
             }
         }
 
-    override suspend fun getPopularTvShows(page:Int) =
+    override suspend fun getPopularMovies(page:Int) =
         flow {
             emit(DataState.Loading)
             try {
-                val response = remoteDataSource.getPopularTvShows(page)
+                val response = remoteDataSource.getPopularMovies(page)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         emit(DataState.Success(it))
@@ -58,11 +58,28 @@ class TvShowsDashboardRepositoryImpl(private val remoteDataSource: RemoteDataSou
             }
         }
 
-    override suspend fun getTopRatedTvShows(page:Int) =
+    override suspend fun getUpcomingMovies(page:Int) =
         flow {
             emit(DataState.Loading)
             try {
-                val response = remoteDataSource.getTopRatedTvShows(page)
+                val response = remoteDataSource.getUpcomingMovies(page)
+                if (response.isSuccessful) {
+                    response.body()?.let {
+                        emit(DataState.Success(it))
+                    }
+                } else {
+                    emit(DataState.Error(response.message().toString()))
+                }
+            } catch (e: Exception) {
+                emit(DataState.Error("No internet connection"))
+            }
+        }
+
+    override suspend fun getTopRatedMovies(page:Int) =
+        flow {
+            emit(DataState.Loading)
+            try {
+                val response = remoteDataSource.getTopRatedMovies(page)
                 if (response.isSuccessful) {
                     response.body()?.let {
                         emit(DataState.Success(it))

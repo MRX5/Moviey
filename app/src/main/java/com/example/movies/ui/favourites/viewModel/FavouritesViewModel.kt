@@ -2,9 +2,7 @@ package com.example.movies.ui.favourites.viewModel
 
 import androidx.lifecycle.*
 import com.example.movies.data.local.entites.MediaEntity
-import com.example.movies.data.model.response.MoviesResponse
 import com.example.movies.ui.favourites.repo.FavouritesRepository
-import com.example.movies.ui.movies.popular.repo.PopularMoviesRepository
 import com.example.movies.utils.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

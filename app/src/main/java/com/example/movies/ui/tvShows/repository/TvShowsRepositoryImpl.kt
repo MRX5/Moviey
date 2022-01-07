@@ -1,11 +1,11 @@
-package com.example.movies.ui.tvShows.tvShows.repo
+package com.example.movies.ui.tvShows.repository
 
 import com.example.movies.data.network.RemoteDataSource
 import com.example.movies.utils.DataState
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 
-class TvShowsRepositoryImpl(private val remoteDataSource: RemoteDataSource):TvShowsRepository {
+class TvShowsRepositoryImpl(private val remoteDataSource: RemoteDataSource): TvShowsRepository {
 
     override suspend fun getOnTheAirTvShows(page:Int) =
         flow {
