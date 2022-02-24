@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -69,6 +70,7 @@ class InTheaterMoviesFragment : Fragment(), OnMovieClickListener {
             viewModel.movies.collect {
                 when(it){
                     is DataState.Loading->{
+                        binding.noInternetLayout.visibility=View.GONE
                         if (totalPages == 0) binding.moviesProgressBar.visibility = View.VISIBLE
                     }
                     is DataState.Success->{
@@ -78,7 +80,7 @@ class InTheaterMoviesFragment : Fragment(), OnMovieClickListener {
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility = View.GONE
-                        Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
+                        binding.noInternetLayout.visibility=VISIBLE
                     }
                 }
             }

@@ -69,6 +69,7 @@ class UpcomingMoviesFragment : Fragment(), OnMovieClickListener {
             viewModel.movies.collect {
                 when(it){
                     is DataState.Loading->{
+                        binding.noInternetLayout.visibility = View.GONE
                         if (totalPages == 0) binding.moviesProgressBar.visibility = View.VISIBLE
                     }
                     is DataState.Success->{
@@ -78,7 +79,7 @@ class UpcomingMoviesFragment : Fragment(), OnMovieClickListener {
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility = View.GONE
-                        Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
+                        binding.noInternetLayout.visibility = View.VISIBLE
                     }
                 }
             }

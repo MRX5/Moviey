@@ -20,6 +20,10 @@
             app:layout_constraintEnd_toEndOf="@+id/recycler_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/no_internet_layout"
+            layout="@layout/no_internet_connection_layout"
+            android:visibility="gone"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

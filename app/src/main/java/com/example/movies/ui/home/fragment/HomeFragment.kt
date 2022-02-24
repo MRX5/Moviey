@@ -116,16 +116,18 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
                     is DataState.Loading->{
                         binding.homeContent.visibility=GONE
                         binding.moviesProgressBar.visibility = VISIBLE
+                        binding.noInternetLayout.visibility= GONE
                     }
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = GONE
+                        binding.noInternetLayout.visibility= GONE
                         binding.homeContent.visibility= VISIBLE
                         sliderAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(sliderAdapter)
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility = GONE
-                        Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
+                        binding.noInternetLayout.visibility= VISIBLE
                     }
                 }
             }
@@ -145,7 +147,6 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
                         upcomingMoviesAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
-
                     }
                 }
             }

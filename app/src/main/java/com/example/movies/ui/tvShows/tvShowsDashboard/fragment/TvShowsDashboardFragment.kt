@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -95,16 +97,20 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
             dashboardViewModel.trending.collect {
                 when(it){
                     is DataState.Loading->{
-                        binding.tvShowsScroll.visibility= View.GONE
+                        binding.tvShowsScroll.visibility= GONE
                         binding.moviesProgressBar.visibility = View.VISIBLE
+                        binding.noInternetLayout.visibility=GONE
                     }
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
+                        binding.moviesProgressBar.visibility = GONE
                         binding.tvShowsScroll.visibility= View.VISIBLE
                         trendingAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(trendingAdapter)
                     }
-                    is DataState.Error->{ }
+                    is DataState.Error->{
+                        binding.moviesProgressBar.visibility=GONE
+                        binding.noInternetLayout.visibility= VISIBLE
+                    }
                 }
             }
         }
@@ -117,11 +123,14 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                 when(it){
 
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.tvShowsScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.tvShowsScroll.visibility= VISIBLE
                         popularAdapter.setData(it.data.results)
                     }
-                    is DataState.Error->{}
+                    is DataState.Error->{
+                        binding.moviesProgressBar.visibility=GONE
+                        binding.noInternetLayout.visibility= VISIBLE
+                    }
                 }
             }
         }
@@ -133,11 +142,14 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
             dashboardViewModel.onTheAir.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.tvShowsScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.tvShowsScroll.visibility= VISIBLE
                         onTheAirAdapter.setData(it.data.results)
                     }
-                    is DataState.Error->{ }
+                    is DataState.Error->{
+                        binding.moviesProgressBar.visibility=GONE
+                        binding.noInternetLayout.visibility= VISIBLE
+                    }
                 }
             }
         }
@@ -149,11 +161,13 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
             dashboardViewModel.topRated.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.tvShowsScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.tvShowsScroll.visibility= VISIBLE
                         topRatedAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
+                        binding.moviesProgressBar.visibility=GONE
+                        binding.noInternetLayout.visibility= VISIBLE
                     }
                 }
             }

@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -106,17 +108,19 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
             viewModel.inTheater.collect {
                 when(it){
                     is DataState.Loading->{
-                        binding.moviesScroll.visibility= View.GONE
-                        binding.moviesProgressBar.visibility = View.VISIBLE
+                        binding.moviesScroll.visibility= GONE
+                        binding.noInternetLayout.visibility=GONE
+                        binding.moviesProgressBar.visibility = VISIBLE
                     }
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesScroll.visibility= VISIBLE
                         inTheaterAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(inTheaterAdapter)
                     }
                     is DataState.Error->{
-                        binding.moviesProgressBar.visibility = View.GONE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.noInternetLayout.visibility=VISIBLE
                         Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
                     }
                 }
@@ -131,8 +135,8 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
             viewModel.trending.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesScroll.visibility= VISIBLE
                         trendingAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
@@ -149,8 +153,8 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
             viewModel.popular.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesScroll.visibility= VISIBLE
                         popularAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
@@ -167,8 +171,8 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
             viewModel.upcoming.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesScroll.visibility= VISIBLE
                         upcomingAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
@@ -185,8 +189,8 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
             viewModel.topRated.collect {
                 when(it){
                     is DataState.Success -> {
-                        binding.moviesProgressBar.visibility = View.GONE
-                        binding.moviesScroll.visibility= View.VISIBLE
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.moviesScroll.visibility= VISIBLE
                         topRatedAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{

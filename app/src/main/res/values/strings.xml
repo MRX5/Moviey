@@ -12,5 +12,6 @@
     <string name="in_theatres">In Theatres</string>
     <string name="see_more">See more</string>
     <string name="trending">Trending</string>
+    <string name="no_internet_connection">No Internet connection</string>
 
 </resources>

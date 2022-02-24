@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -97,16 +99,18 @@ class TvShowsFragment : Fragment(),OnTvShowClickListener {
             viewModel.tvShows.collect {
                 when(it){
                     is DataState.Loading->{
-                        if (totalPages == 0) binding.TvShowsContent.progressBar.visibility = View.VISIBLE
+                        if (totalPages == 0) binding.TvShowsContent.progressBar.visibility = VISIBLE
+                        binding.TvShowsContent.noInternetLayout.visibility=GONE
                     }
                     is DataState.Success->{
-                        binding.TvShowsContent.progressBar.visibility = View.GONE
+                        binding.TvShowsContent.progressBar.visibility = GONE
+                        binding.TvShowsContent.noInternetLayout.visibility=GONE
                         totalPages = it.data.total_pages
                         tvShowsAdapter.setData(it.data.results)
                     }
                     is DataState.Error->{
-                        binding.TvShowsContent.progressBar.visibility = View.GONE
-                        Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
+                        binding.TvShowsContent.progressBar.visibility = GONE
+                        binding.TvShowsContent.noInternetLayout.visibility= VISIBLE
                     }
                 }
             }

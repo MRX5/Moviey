@@ -96,6 +96,7 @@ class MovieDetailsActivity : AppCompatActivity(), MediaClickListener {
                 when (it) {
                     is DataState.Loading -> {
                         binding.detailsActivityScrollView.visibility = GONE
+                        binding.noInternetLayout.visibility=GONE
                         binding.progressBar.visibility = VISIBLE
                     }
                     is DataState.Success -> {
@@ -104,10 +105,7 @@ class MovieDetailsActivity : AppCompatActivity(), MediaClickListener {
                     }
                     is DataState.Error -> {
                         binding.progressBar.visibility = GONE
-                        Toast.makeText(this@MovieDetailsActivity, it.exception, Toast.LENGTH_LONG)
-                            .show()
-                    }
-                    else -> {
+                        binding.noInternetLayout.visibility= VISIBLE
                     }
                 }
             }

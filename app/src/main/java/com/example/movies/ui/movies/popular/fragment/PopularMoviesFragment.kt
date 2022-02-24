@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -24,9 +26,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 private const val TAG = "PopularMoviesFragmentmostafa"
+
 @AndroidEntryPoint
 class PopularMoviesFragment : Fragment(), OnMovieClickListener {
-     lateinit var binding: FragmentPopularMoviesBinding
+    lateinit var binding: FragmentPopularMoviesBinding
     private val viewModel: PopularViewModel by viewModels()
     private val moviesAdapter by lazy { MoviesAdapter(requireContext(), this) }
     private var page: Int = 1
@@ -64,21 +67,22 @@ class PopularMoviesFragment : Fragment(), OnMovieClickListener {
     }
 
     private fun fetchMovies() {
-         viewModel.fetchPopularMovies(page)
+        viewModel.fetchPopularMovies(page)
         lifecycleScope.launch {
             viewModel.movies.collect {
-                when(it){
-                    is DataState.Loading->{
+                when (it) {
+                    is DataState.Loading -> {
+                        binding.noInternetLayout.visibility = GONE
                         if (totalPages == 0) binding.moviesProgressBar.visibility = View.VISIBLE
                     }
-                    is DataState.Success->{
-                        binding.moviesProgressBar.visibility = View.GONE
+                    is DataState.Success -> {
+                        binding.moviesProgressBar.visibility = GONE
                         totalPages = it.data.total_pages
                         moviesAdapter.setData(it.data.results)
                     }
-                    is DataState.Error->{
-                        binding.moviesProgressBar.visibility = View.GONE
-                        Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
+                    is DataState.Error -> {
+                        binding.moviesProgressBar.visibility = GONE
+                        binding.noInternetLayout.visibility = VISIBLE
                     }
                 }
             }
@@ -86,8 +90,8 @@ class PopularMoviesFragment : Fragment(), OnMovieClickListener {
     }
 
     override fun onMovieClick(movieID: Int) {
-        val intent= Intent(context, MovieDetailsActivity::class.java).apply {
-            putExtra(Constants.MOVIE_ID,movieID)
+        val intent = Intent(context, MovieDetailsActivity::class.java).apply {
+            putExtra(Constants.MOVIE_ID, movieID)
         }
         startActivity(intent)
     }

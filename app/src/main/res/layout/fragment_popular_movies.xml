@@ -15,8 +15,12 @@
         <ProgressBar
             android:id="@+id/movies_progress_bar"
             android:layout_width="wrap_content"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/no_internet_layout"
+            layout="@layout/no_internet_connection_layout" />
     </FrameLayout>
 </layout>

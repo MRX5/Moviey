@@ -50,10 +50,16 @@ OnMovieClickListener,OnTvShowClickListener{
             when(it){
                 is DataState.Loading->{
                     binding.Content.progressBar.visibility=VISIBLE
+                    binding.Content.noInternetLayout.visibility= GONE
+
                 }
                 is DataState.Success->{
                     binding.Content.progressBar.visibility=GONE
+                    if(it.data.isEmpty()){
+                        binding.emptyListTextview.visibility= VISIBLE
+                    }else{
                     favouritesAdapter.setData(it.data)
+                    }
                 }
             }
         }}
