@@ -46,4 +46,13 @@
         <item name="fontFamily">@font/cairo_bold</item>
 
     </style>
+
+    <style name="Theme.Movies.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Movies.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Movies.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

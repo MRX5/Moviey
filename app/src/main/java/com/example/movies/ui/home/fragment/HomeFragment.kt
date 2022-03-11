@@ -2,6 +2,7 @@ package com.example.movies.ui.home.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,7 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("mostafa", "onCreate: ")
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.handler=this
         return binding.root
@@ -58,9 +60,9 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("mostafa", "onViewCreate: ")
         setupSliderAdapter()
         setupRecyclerViews()
-
         fetchTrendingMoviesAndTvShows()
         fetchUpcomingMovies()
         fetchPopularMovies()
@@ -116,18 +118,18 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
                     is DataState.Loading->{
                         binding.homeContent.visibility=GONE
                         binding.moviesProgressBar.visibility = VISIBLE
-                        binding.noInternetLayout.visibility= GONE
+                        binding.noInternetLayout.root.visibility= GONE
                     }
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = GONE
-                        binding.noInternetLayout.visibility= GONE
+                        binding.noInternetLayout.root.visibility= GONE
                         binding.homeContent.visibility= VISIBLE
                         sliderAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(sliderAdapter)
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility = GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }

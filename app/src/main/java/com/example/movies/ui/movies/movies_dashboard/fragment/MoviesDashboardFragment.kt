@@ -110,7 +110,7 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
                 when(it){
                     is DataState.Loading->{
                         binding.moviesScroll.visibility= GONE
-                        binding.noInternetLayout.visibility=GONE
+                        binding.noInternetLayout.root.visibility=GONE
                         binding.moviesProgressBar.visibility = VISIBLE
                     }
                     is DataState.Success -> {
@@ -121,7 +121,7 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility = GONE
-                        binding.noInternetLayout.visibility=VISIBLE
+                        binding.noInternetLayout.root.visibility=VISIBLE
                         Toast.makeText(context, it.exception, Toast.LENGTH_LONG).show()
                     }
                 }

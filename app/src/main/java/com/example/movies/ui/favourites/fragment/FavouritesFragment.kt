@@ -49,7 +49,7 @@ OnMovieClickListener,OnTvShowClickListener{
             when(it){
                 is DataState.Loading->{
                     binding.Content.progressBar.visibility=VISIBLE
-                    binding.Content.noInternetLayout.visibility= GONE
+                    binding.Content.noInternetLayout.root.visibility= GONE
 
                 }
                 is DataState.Success->{

@@ -104,7 +104,7 @@ class TvDetailsActivity : AppCompatActivity(), MediaClickListener {
                 when (it) {
                     is DataState.Loading -> {
                         binding.detailsActivityScrollView.visibility = GONE
-                        binding.noInternetLayout.visibility=GONE
+                        binding.noInternetLayout.root.visibility=GONE
                         binding.progressBar.visibility = VISIBLE
                     }
                     is DataState.Success -> {
@@ -115,7 +115,7 @@ class TvDetailsActivity : AppCompatActivity(), MediaClickListener {
                     }
                     is DataState.Error -> {
                         binding.progressBar.visibility = GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }

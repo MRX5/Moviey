@@ -99,7 +99,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                     is DataState.Loading->{
                         binding.tvShowsScroll.visibility= GONE
                         binding.moviesProgressBar.visibility = VISIBLE
-                        binding.noInternetLayout.visibility=GONE
+                        binding.noInternetLayout.root.visibility=GONE
                     }
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = GONE
@@ -109,7 +109,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility=GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }
@@ -129,7 +129,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility=GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }
@@ -148,7 +148,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility=GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }
@@ -167,7 +167,7 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                     }
                     is DataState.Error->{
                         binding.moviesProgressBar.visibility=GONE
-                        binding.noInternetLayout.visibility= VISIBLE
+                        binding.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@+id/splashFragment">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.movies.ui.home.fragment.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_tvShowsFragment"
+            app:destination="@id/tvShowsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_movies_dashboard"
+        android:name="com.example.movies.ui.movies.movies_dashboard.fragment.MoviesDashboardFragment"
+        android:label="Movies DashBoard"
+        tools:layout="@layout/fragment_movies_dashboard" >
+        <action
+            android:id="@+id/action_moviesDashboardFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_tvShows_dashboard"
+        android:name="com.example.movies.ui.tvShows.tvShowsDashboard.fragment.TvShowsDashboardFragment"
+        android:label="Tv Shows Dashboard"
+        tools:layout="@layout/fragment_tv_shows_dashboard" >
+        <action
+            android:id="@+id/action_tvShowsDashboardFragment_to_tvShowsFragment"
+            app:destination="@id/tvShowsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_favourites"
+        android:name="com.example.movies.ui.favourites.fragment.FavouritesFragment"
+        android:label="Favourites" />
+
+    <activity
+        android:id="@+id/nav_search"
+        android:name="com.example.movies.ui.search.activity.SearchActivity"
+        android:label="Search" />
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.example.movies.ui.movies.movies.fragment.MoviesFragment"
+        android:label="MoviesFragment" />
+
+    <fragment
+        android:id="@+id/tvShowsFragment"
+        android:name="com.example.movies.ui.tvShows.tvShows.fragment.TvShowsFragment"
+        android:label="TvShowsFragment" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.movies.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_homeFragment"
+            app:destination="@id/nav_home"
+            app:popUpTo="@+id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

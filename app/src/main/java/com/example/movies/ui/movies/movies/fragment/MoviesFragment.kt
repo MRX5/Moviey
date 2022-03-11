@@ -107,7 +107,7 @@ class MoviesFragment : Fragment(), OnMovieClickListener {
             viewModel.movies.collect {
                 when (it) {
                     is DataState.Loading -> {
-                        binding.MoviesContent.noInternetLayout.visibility = GONE
+                        binding.MoviesContent.noInternetLayout.root.visibility = GONE
                         if (totalPages == 0) binding.MoviesContent.progressBar.visibility = VISIBLE
                     }
                     is DataState.Success -> {
@@ -117,7 +117,7 @@ class MoviesFragment : Fragment(), OnMovieClickListener {
                     }
                     is DataState.Error -> {
                         binding.MoviesContent.progressBar.visibility = GONE
-                        binding.MoviesContent.noInternetLayout.visibility = VISIBLE
+                        binding.MoviesContent.noInternetLayout.root.visibility = VISIBLE
                     }
                 }
             }

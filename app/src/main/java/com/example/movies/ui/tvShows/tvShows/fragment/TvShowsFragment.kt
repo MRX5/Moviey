@@ -100,7 +100,7 @@ class TvShowsFragment : Fragment(),OnTvShowClickListener {
                 when(it){
                     is DataState.Loading->{
                         if (totalPages == 0) binding.TvShowsContent.progressBar.visibility = VISIBLE
-                        binding.TvShowsContent.noInternetLayout.visibility=GONE
+                        binding.TvShowsContent.noInternetLayout.root.visibility=GONE
                     }
                     is DataState.Success->{
                         binding.TvShowsContent.progressBar.visibility = GONE
@@ -109,7 +109,7 @@ class TvShowsFragment : Fragment(),OnTvShowClickListener {
                     }
                     is DataState.Error->{
                         binding.TvShowsContent.progressBar.visibility = GONE
-                        binding.TvShowsContent.noInternetLayout.visibility= VISIBLE
+                        binding.TvShowsContent.noInternetLayout.root.visibility= VISIBLE
                     }
                 }
             }
