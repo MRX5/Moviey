@@ -1,62 +1,61 @@
 package com.example.movies.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import androidx.core.view.GravityCompat
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import com.example.movies.R
 import com.example.movies.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
+class MainActivity : AppCompatActivity(),NavController.OnDestinationChangedListener {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
         setupToolbar()
         setupNavigationDrawable()
+
+    }
+
+    private fun setupNavigationDrawable() {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        binding.navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener(this)
     }
 
     private fun setupToolbar() {
-        setSupportActionBar(binding.contentMain.mainToolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(true)
-    }
+        setSupportActionBar(binding.appBarMain.toolbar)
 
 
-    private fun setupNavigationDrawable() {
-        navController = findNavController(R.id.nav_host_fragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.homeFragment,
-                R.id.moviesDashboardFragment,
-                R.id.tvShowsFragment,
-                R.id.favouritesFragment,
-                R.id.searchActivity
-            ), binding.drawableLayout
+                R.id.nav_home,
+                R.id.nav_movies_dashboard,
+                R.id.nav_tvShows_dashboard,
+                R.id.nav_favourites,
+                R.id.nav_search
+            ), binding.drawerLayout
         )
-        binding.navigationView.setupWithNavController(navController)
-        navController.addOnDestinationChangedListener(this)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        binding.navigationView.setupWithNavController(navController)
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
@@ -64,15 +63,12 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController=findNavController(R.id.nav_host_fragment_content_main)
         if (item.itemId == R.id.action_search) {
-            navController.navigate(R.id.searchActivity)
+            navController.navigate(R.id.nav_search)
             return true
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onDestinationChanged(
@@ -82,17 +78,22 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     ) {
         when (destination.id) {
             R.id.splashFragment -> {
-                binding.contentMain.mainToolbar.visibility = GONE
+                binding.appBarMain.toolbar.visibility = View.GONE
             }
             else -> {
-                binding.contentMain.mainToolbar.visibility = VISIBLE
+                binding.appBarMain.toolbar.visibility = View.VISIBLE
             }
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
     override fun onBackPressed() {
-        if (binding.drawableLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawableLayout.closeDrawer(GravityCompat.START)
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
