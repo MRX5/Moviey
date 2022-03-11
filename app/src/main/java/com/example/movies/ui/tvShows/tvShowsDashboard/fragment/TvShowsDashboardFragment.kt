@@ -98,12 +98,12 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
                 when(it){
                     is DataState.Loading->{
                         binding.tvShowsScroll.visibility= GONE
-                        binding.moviesProgressBar.visibility = View.VISIBLE
+                        binding.moviesProgressBar.visibility = VISIBLE
                         binding.noInternetLayout.visibility=GONE
                     }
                     is DataState.Success -> {
                         binding.moviesProgressBar.visibility = GONE
-                        binding.tvShowsScroll.visibility= View.VISIBLE
+                        binding.tvShowsScroll.visibility= VISIBLE
                         trendingAdapter.setData(it.data.results)
                         binding.imageSlider.setSliderAdapter(trendingAdapter)
                     }
@@ -176,21 +176,21 @@ class TvShowsDashboardFragment : Fragment() ,TvShowsSeeMoreClickListener,OnTvSho
 
     override fun openTrendingFragment() {
         val args= bundleOf(Constants.MediaType to Constants.TRENDING)
-        findNavController().navigate(R.id.action_tvShowsFragment_to_tvShowsContentFragment,args)
+        findNavController().navigate(R.id.action_tvShowsDashboardFragment_to_tvShowsFragment,args)
     }
     override fun openOnTheAirFragment() {
         val args= bundleOf(Constants.MediaType to Constants.ON_THE_AIR)
-        findNavController().navigate(R.id.action_tvShowsFragment_to_tvShowsContentFragment,args)
+        findNavController().navigate(R.id.action_tvShowsDashboardFragment_to_tvShowsFragment,args)
     }
 
     override fun openPopularFragment() {
         val args= bundleOf(Constants.MediaType to Constants.POPULAR)
-        findNavController().navigate(R.id.action_tvShowsFragment_to_tvShowsContentFragment,args)
+        findNavController().navigate(R.id.action_tvShowsDashboardFragment_to_tvShowsFragment,args)
     }
 
     override fun openTopRatedFragment() {
         val args= bundleOf(Constants.MediaType to Constants.TOP_RATED)
-        findNavController().navigate(R.id.action_tvShowsFragment_to_tvShowsContentFragment,args)
+        findNavController().navigate(R.id.action_tvShowsDashboardFragment_to_tvShowsFragment,args)
     }
 
     override fun onTvShowClick(tvShowID: Int) {

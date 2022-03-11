@@ -19,7 +19,6 @@ import com.example.movies.listener.OnMovieClickListener
 import com.example.movies.listener.OnTvShowClickListener
 import com.example.movies.ui.favourites.adapter.FavouritesAdapter
 import com.example.movies.ui.favourites.viewModel.FavouritesViewModel
-import com.example.movies.ui.movies.in_theater.viewModel.InTheaterViewModel
 import com.example.movies.ui.movies.movie_details.activity.MovieDetailsActivity
 import com.example.movies.ui.tvShows.tv_details.activity.TvDetailsActivity
 import com.example.movies.utils.Constants

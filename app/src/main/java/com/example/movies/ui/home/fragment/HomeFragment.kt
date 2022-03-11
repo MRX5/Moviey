@@ -241,11 +241,13 @@ class HomeFragment : Fragment(), OnMovieClickListener, OnTvShowClickListener
     }
 
     override fun openUpcomingMoviesFragment() {
-        findNavController().navigate(R.id.action_homeFragment_to_upcomingMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.UPCOMING)
+        findNavController().navigate(R.id.action_homeFragment_to_moviesFragment,args)
     }
 
     override fun openPopularMoviesFragment() {
-        findNavController().navigate(R.id.action_homeFragment_to_popularMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.POPULAR)
+        findNavController().navigate(R.id.action_homeFragment_to_moviesFragment,args)
     }
 
     override fun openTrendingTvShowsFragment() {

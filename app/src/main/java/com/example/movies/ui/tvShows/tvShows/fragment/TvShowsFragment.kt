@@ -104,7 +104,6 @@ class TvShowsFragment : Fragment(),OnTvShowClickListener {
                     }
                     is DataState.Success->{
                         binding.TvShowsContent.progressBar.visibility = GONE
-                        binding.TvShowsContent.noInternetLayout.visibility=GONE
                         totalPages = it.data.total_pages
                         tvShowsAdapter.setData(it.data.results)
                     }

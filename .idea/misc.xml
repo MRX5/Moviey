@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/drawable/gradient.xml" value="0.2195" />
+        <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/drawable/movie_card_gradient.xml" value="0.2195" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/activity_main.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/activity_movie_details.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/activity_tv_details.xml" value="0.3435897435897436" />
@@ -11,10 +13,12 @@
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/details_toolbar.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_favourites.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_home.xml" value="0.3435897435897436" />
+        <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_movies.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_movies_dashboard.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_popular_movies.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_tv_shows.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/fragment_tv_shows_dashboard.xml" value="0.3435897435897436" />
+        <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/movie_card.xml" value="0.3435897435897436" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/no_internet_connection_layout.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/pc/AndroidStudioProjects/Movies/app/src/main/res/layout/search_item_layout.xml" value="0.3435897435897436" />
       </map>

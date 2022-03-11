@@ -12,9 +12,9 @@
         android:label="SearchActivity" />
 
     <fragment
-        android:id="@+id/popularMoviesFragment"
-        android:name="com.example.movies.ui.movies.popular.fragment.PopularMoviesFragment"
-        android:label="Popular Movies" />
+        android:id="@+id/moviesFragment"
+        android:name="com.example.movies.ui.movies.movies.fragment.MoviesFragment"
+        android:label="Movies" />
 
     <fragment
         android:id="@+id/splashFragment"
@@ -29,25 +29,12 @@
     </fragment>
 
     <fragment
-        android:id="@+id/topRatedMoviesFragment"
-        android:name="com.example.movies.ui.movies.top_rated.fragment.TopRatedMoviesFragment"
-        android:label="TopRated Movies" />
-
-    <fragment
-        android:id="@+id/upcomingMoviesFragment"
-        android:name="com.example.movies.ui.movies.upcoming.fragment.UpcomingMoviesFragment"
-        android:label="Upcoming Movies" />
-
-    <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.movies.ui.home.fragment.HomeFragment"
         android:label="Home">
         <action
-            android:id="@+id/action_homeFragment_to_upcomingMoviesFragment"
-            app:destination="@id/upcomingMoviesFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_popularMoviesFragment"
-            app:destination="@id/popularMoviesFragment" />
+            android:id="@+id/action_homeFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
         <action
             android:id="@+id/action_homeFragment_to_tvShowsFragment"
             app:destination="@id/tvShowsFragment" />
@@ -58,21 +45,11 @@
         android:id="@+id/moviesDashboardFragment"
         android:name="com.example.movies.ui.movies.movies_dashboard.fragment.MoviesDashboardFragment"
         android:label="Movies Dashboard">
+
+
         <action
-            android:id="@+id/action_moviesFragment_to_topRatedMoviesFragment"
-            app:destination="@id/topRatedMoviesFragment" />
-        <action
-            android:id="@+id/action_moviesFragment_to_popularMoviesFragment"
-            app:destination="@id/popularMoviesFragment" />
-        <action
-            android:id="@+id/action_moviesFragment_to_upcomingMoviesFragment"
-            app:destination="@id/upcomingMoviesFragment" />
-        <action
-            android:id="@+id/action_moviesFragment_to_inTheaterMoviesFragment"
-            app:destination="@id/inTheaterMoviesFragment" />
-        <action
-            android:id="@+id/action_moviesFragment_to_trendingMoviesFragment"
-            app:destination="@id/trendingMoviesFragment" />
+            android:id="@+id/action_moviesDashboardFragment_to_moviesFragment"
+            app:destination="@id/moviesFragment" />
     </fragment>
 
     <fragment
@@ -80,17 +57,10 @@
         android:name="com.example.movies.ui.tvShows.tvShowsDashboard.fragment.TvShowsDashboardFragment"
         android:label="TV Shows Dashboard" >
         <action
-            android:id="@+id/action_tvShowsFragment_to_tvShowsContentFragment"
+            android:id="@+id/action_tvShowsDashboardFragment_to_tvShowsFragment"
             app:destination="@id/tvShowsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/inTheaterMoviesFragment"
-        android:name="com.example.movies.ui.movies.in_theater.fragment.InTheaterMoviesFragment"
-        android:label="In Theater Movies" />
-    <fragment
-        android:id="@+id/trendingMoviesFragment"
-        android:name="com.example.movies.ui.movies.trending.fragment.TrendingMoviesFragment"
-        android:label="Trending Movies" />
+
     <fragment
         android:id="@+id/tvShowsFragment"
         android:name="com.example.movies.ui.tvShows.tvShows.fragment.TvShowsFragment"

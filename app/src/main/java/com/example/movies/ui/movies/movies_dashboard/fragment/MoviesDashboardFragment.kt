@@ -9,6 +9,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -184,7 +185,6 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
 
     private fun fetchTopRatedMovies(){
         viewModel.fetchTopRatedMovies(page)
-
         lifecycleScope.launchWhenCreated {
             viewModel.topRated.collect {
                 when(it){
@@ -203,24 +203,28 @@ class MoviesDashboardFragment : Fragment() , OnMovieClickListener, MoviesSeeMore
 
 
     override fun openInTheaterFragment() {
-        findNavController().navigate(R.id.action_moviesFragment_to_inTheaterMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.IN_THEATRES)
+        findNavController().navigate(R.id.action_moviesDashboardFragment_to_moviesFragment,args)
     }
 
     override fun openTrendingFragment() {
-        findNavController().navigate(R.id.action_moviesFragment_to_trendingMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.TRENDING)
+        findNavController().navigate(R.id.action_moviesDashboardFragment_to_moviesFragment,args)
     }
 
     override fun openUpcomingFragment() {
-        findNavController().navigate(R.id.action_moviesFragment_to_upcomingMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.UPCOMING)
+        findNavController().navigate(R.id.action_moviesDashboardFragment_to_moviesFragment,args)
     }
 
     override fun openPopularFragment() {
-        findNavController().navigate(R.id.action_moviesFragment_to_popularMoviesFragment)
+        val args= bundleOf(Constants.MediaType to Constants.POPULAR)
+        findNavController().navigate(R.id.action_moviesDashboardFragment_to_moviesFragment,args)
     }
 
     override fun openTopRatedFragment() {
-        findNavController().navigate(R.id.action_moviesFragment_to_topRatedMoviesFragment)
-
+        val args= bundleOf(Constants.MediaType to Constants.TOP_RATED)
+        findNavController().navigate(R.id.action_moviesDashboardFragment_to_moviesFragment,args)
     }
 
     override fun onMovieClick(movieID: Int) {

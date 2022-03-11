@@ -12,6 +12,7 @@ object Constants {
     const val TOP_RATED="Top Rated"
     const val ON_THE_AIR="On The Air"
     const val TRENDING="Trending"
+    const val IN_THEATRES="In theatres"
     const val MOVIE_ID="movie-id"
     const val TV_ID="tv-id"
     const val MOVIE="movie"

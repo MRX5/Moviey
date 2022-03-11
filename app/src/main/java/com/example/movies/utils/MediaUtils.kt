@@ -64,9 +64,17 @@ class MediaUtils {
 
         fun extractGenresNames(genres: List<Genres>): String {
             val result = StringBuilder("")
-            for (idx in 0..(genres.size - 1).coerceAtMost(2)) {
-                result.append(genres[idx].name + ", ")
+            var cnt=2
+            for(idx in genres.indices){
+                if(genres[idx].name.length>=12){
+                    if(cnt==0)break;
+                    else cnt--
+                }
+                result.append(genres[idx].name+", ")
+                if (cnt==0)break
+                cnt--
             }
+
             return if (result.isNotEmpty() && result.last().isWhitespace()) result.dropLast(2)
                 .toString()
             else result.toString()
@@ -124,7 +132,7 @@ class MediaUtils {
                         10767 -> result += ", " + "Talk"
                         10768 -> result += ", " + "War, Politics"
                     }
-                    if (cnt != 0) cnt--
+                    if (cnt != 0 && result.length<20) cnt--
                     else break
                 }
                 if (result.isNotEmpty()) result = result.drop(2) // remove ", " from result
