@@ -6,14 +6,14 @@ Discover millions of Movies and Tv Shows 🎥
 
 # Built With 🛠
 
--Kotlin
--Coroutines
--Room 
--Retrofit
--Navigation Component
--Hilt
--Flow
--Picasso
+- Kotlin
+- Coroutines
+- Room 
+- Retrofit
+- Navigation Component
+- Hilt
+- Flow
+- Picasso
 
 # Architecture 🗼
 <img src="https://user-images.githubusercontent.com/30687866/163729191-343d9932-38aa-450b-9383-44607ea0b47f.jpg">
