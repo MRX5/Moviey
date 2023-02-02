@@ -12,6 +12,7 @@ import com.example.movies.data.model.entity.Media
 import com.example.movies.utils.Constants
 
 import com.example.movies.utils.MediaUtils
+import com.example.movies.utils.Utils.Companion.roundDoubleToOneNumber
 import com.smarteist.autoimageslider.SliderViewAdapter
 import com.squareup.picasso.Picasso
 
@@ -49,7 +50,7 @@ class SliderAdapter(private val listener:MediaClickListener) : SliderViewAdapter
         fun bind(media:Media) {
             releaseDateTextView?.text=MediaUtils.getMediaReleaseDate(media)
             titleTextView?.text=MediaUtils.getMediaTitle(media)
-            rateTextView?.text=media.vote.toString()
+            rateTextView?.text=media.vote?.roundDoubleToOneNumber().toString()
             rateBar?.rating=MediaUtils.getActualRate(media.vote)
             Picasso.get().load(Constants.TMDB_BACKDROP_PATH + media.backdrop).into(backdropImage)
             itemView.setOnClickListener {

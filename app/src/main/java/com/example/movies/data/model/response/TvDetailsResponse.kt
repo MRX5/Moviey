@@ -11,7 +11,7 @@ data class TvDetailsResponse(
     @SerializedName("poster_path") var poster:String?,
     @SerializedName("original_language") val language:String?,
     @SerializedName("first_air_date") var year:String?,
-    @SerializedName("vote_average") val vote:Double?,
+    @SerializedName("vote_average") var vote:Double?,
     val number_of_seasons:Int?,
     val seasons:List<Season>,
     val genres:List<Genres>?,

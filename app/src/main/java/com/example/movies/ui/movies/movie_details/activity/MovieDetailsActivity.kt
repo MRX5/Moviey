@@ -26,6 +26,7 @@ import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import com.example.movies.utils.MediaUtils
+import com.example.movies.utils.Utils.Companion.roundDoubleToOneNumber
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -115,6 +116,7 @@ class MovieDetailsActivity : AppCompatActivity(), MediaClickListener {
     private fun populateViews(moviesDetails: MovieDetailsResponse) {
         binding.progressBar.visibility = GONE
         binding.detailsActivityScrollView.visibility = VISIBLE
+        moviesDetails.vote = moviesDetails.vote?.roundDoubleToOneNumber()
         binding.movie = moviesDetails
         binding.genres = moviesDetails.genres?.let { it -> MediaUtils.extractGenresNames(it) }
         moviesDetails.credits?.let { it -> castsAdapter.setData(it.casts) }

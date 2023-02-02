@@ -14,7 +14,7 @@ data class MovieDetailsResponse(
     @SerializedName("poster_path") var poster:String?,
     @SerializedName("original_language") val language:String?,
     @SerializedName("release_date") var year:String,
-    @SerializedName("vote_average") val vote:Double?,
+    @SerializedName("vote_average") var vote:Double?,
     @SerializedName("runtime") var length:String?,
     val genres:List<Genres>?,
     val credits: Credits?,

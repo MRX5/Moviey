@@ -10,6 +10,7 @@ import com.example.movies.databinding.TvShowCardBinding
 import com.example.movies.listener.OnTvShowClickListener
 import com.example.movies.data.model.entity.TV_Show
 import com.example.movies.utils.MediaUtils
+import com.example.movies.utils.Utils.Companion.roundDoubleToOneNumber
 
 class TvShowsAdapter(val context: Context, val listener: OnTvShowClickListener) : RecyclerView.Adapter<TvShowsAdapter.TvShowsViewHolder>() {
 
@@ -34,6 +35,7 @@ class TvShowsAdapter(val context: Context, val listener: OnTvShowClickListener) 
 
    inner class TvShowsViewHolder(private val binding: TvShowCardBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(tvShows: TV_Show) =with(binding){
+            tvShows.vote = tvShows.vote?.roundDoubleToOneNumber()
             this.tvShow=tvShows
             binding.root.setOnClickListener {
                 listener.onTvShowClick(tvShows.id)

@@ -27,6 +27,7 @@ import com.example.movies.utils.Constants
 import com.example.movies.utils.DataState
 import com.example.movies.utils.LinearSpacingItemDecoration
 import com.example.movies.utils.MediaUtils
+import com.example.movies.utils.Utils.Companion.roundDoubleToOneNumber
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -123,6 +124,7 @@ class TvDetailsActivity : AppCompatActivity(), MediaClickListener {
     }
     //--------------------------------------------------------------------------
     private fun populateUi(tvShowDetails: TvDetailsResponse) {
+        tvShowDetails.vote = tvShowDetails.vote?.roundDoubleToOneNumber()
         binding.tvShow = tvShowDetails
         binding.genres = tvShowDetails.genres?.let { it -> MediaUtils.extractGenresNames(it) }
         tvShowDetails.credits?.let { castsAdapter.setData(it.casts) }

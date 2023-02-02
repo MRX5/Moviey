@@ -10,5 +10,13 @@ class Utils {
             val x=context.resources.displayMetrics.density
             return (x*px).toInt()
         }
+
+        fun Double.roundDoubleToOneNumber():Double{
+            return try{
+                String.format("%.1f", this).toDouble()
+            }catch (e:java.lang.Exception){
+                0.0
+            }
+        }
     }
 }
